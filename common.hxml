@@ -4,12 +4,18 @@
 
 -lib heaps
 
--lib hxbit
-# -lib hide
 -lib castle
--lib hscript
 -lib stb_ogg_sound
 
+# -lib hide
+# -lib hxbit
+# -lib hscript
+
+-main Game
+
+##################
+# Configuration
+###
 
 -D windowTitle=GameBase
 -D windowSize=1280x720
@@ -19,5 +25,3 @@
 
 # Uncomment and set if your Aseprite installation is not in the default path
 #-D asepritePath=path to your aseprite.exe/executable
-
--main Game
