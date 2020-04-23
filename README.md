@@ -1,12 +1,16 @@
 # Heaps Turbo Game Base
 
-A very barebones heaps game template.
+A very barebones heaps game template, a bit inspired by https://github.com/deepnight/gameBase
+
+and https://github.com/Yanrishatum/heeps (based my 3D sprite implementation on the one that exists here).
 
 Some current features:
 
-* Possibility to set 2d pixel size for the screen.
+* Possibility to set 2D pixel size for the screen.
 
-* A HTML template file that gets exported along with the js output. Build and zip it
+* Extremely simple entity system with fixed timestep updates.
+
+* A HTML template file that gets exported along with the js output. Build and zip it and you're done.
 
 * The release JS build uses the Google closure js minifier.
 
