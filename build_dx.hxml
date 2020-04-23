@@ -1,0 +1,6 @@
+common.hxml
+
+-debug
+
+-lib hldx
+-hl build/hl/hlboot.dat

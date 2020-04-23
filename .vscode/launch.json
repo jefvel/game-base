@@ -1,0 +1,32 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "2.0.0",
+    "configurations": [
+		{
+			"type": "chrome",
+			"request": "launch",
+			"name": "Chrome WebGL",
+			"url": "${workspaceFolder}/build/web/index.html",
+			"webRoot": "${workspaceFolder}/build/web",
+			"preLaunchTask": "HeapsJS"
+		},
+		{
+			"name": "HashLink SDL",
+			"request": "launch",
+			"type": "hl",
+			"hxml": "build_sdl.hxml",
+			"cwd": "${workspaceRoot}",
+			"preLaunchTask": "HeapsHL.SDL"
+		},
+		{
+			"name": "HashLink DirectX",
+			"request": "launch",
+			"type": "hl",
+			"hxml": "build_dx.hxml",
+			"cwd": "${workspaceRoot}",
+			"preLaunchTask": "HeapsHL.DX"
+		},
+    ]
+}

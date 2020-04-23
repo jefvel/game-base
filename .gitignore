@@ -1,0 +1,17 @@
+*.swp
+game.js
+game.js.map
+game.hl
+*~
+
+bin
+build
+redist
+publish.sh
+.tmp
+*.asd
+
+*.DS_Store
+.DS_Store
+
+*.wav.asd
