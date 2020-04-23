@@ -18,3 +18,5 @@ Some current features:
 hxd.Res.img.testcharacter_tilesheet.toSprite(); // Creates a h2d.Bitmap type object with animation support
 hxd.Res.img.testcharacter_tilesheet.toSprite3D(); // Creates a 3D billboard type mesh for h3d.
 ```
+
+I will write more about this later
