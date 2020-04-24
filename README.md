@@ -1,6 +1,6 @@
-# Heaps Turbo Game Base
+# ![turbo logo](https://raw.githubusercontent.com/jefvel/game-base/master/logo.png)
 
-A very barebones heaps game template, a bit inspired by https://github.com/deepnight/gameBase
+A very barebones [Heaps](https://heaps.io) game template, a bit inspired by https://github.com/deepnight/gameBase
 
 and https://github.com/Yanrishatum/heeps (based my 3D sprite implementation on the one that exists here).
 
