@@ -8,7 +8,7 @@ Some current features:
 
 * Possibility to set 2D pixel size for the screen.
 
-* Extremely simple entity system with fixed timestep updates.
+* Extremely simple entity and gamestate system with fixed timestep updates.
 
 * A HTML template file that gets exported along with the js output. Build and zip it and you're done.
 

@@ -1,5 +1,7 @@
 package;
 
+import gamestate.GameStateHandler;
+
 class Game extends hxd.App {
     static var instance : Game;
     public static inline function getInstance() {
@@ -12,6 +14,7 @@ class Game extends hxd.App {
     public var screenHeight : Int;
 
     var entities : entity.Entities;
+    var states : gamestate.GameStateHandler;
 
     override function init() {
         super.init();
@@ -19,6 +22,8 @@ class Game extends hxd.App {
 
         initEntities();
         configRenderer();
+
+        states = new GameStateHandler(this);
 
         var e = hxd.Res.img.test_tilesheet.toSprite2D();
         s2d.addChild(e);
@@ -51,6 +56,7 @@ class Game extends hxd.App {
         timeAccumulator += dt;
         while (timeAccumulator > Const.TICK_TIME && maxTicksPerUpdate > 0) {
             timeAccumulator -= dt;
+            states.update(Const.TICK_TIME);
             entities.update(Const.TICK_TIME);
             maxTicksPerUpdate --;
         }

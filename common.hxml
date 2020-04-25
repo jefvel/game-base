@@ -1,4 +1,4 @@
---macro Config.initConfig()
+--macro buildutil.Config.initConfig()
 
 -cp src
 

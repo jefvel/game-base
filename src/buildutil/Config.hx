@@ -1,4 +1,4 @@
-package;
+package buildutil;
 
 import h3d.mat.Texture;
 import hxd.res.Embed;
