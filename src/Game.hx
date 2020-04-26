@@ -10,7 +10,13 @@ class Game extends hxd.App {
 
     public var paused : Bool;
 
+    /**
+     * the width of the screen in scaled pixels
+     */
     public var screenWidth : Int;
+    /**
+     * the height of the screen in scaled pixels
+     */
     public var screenHeight : Int;
 
     var entities : entity.Entities;
@@ -39,6 +45,8 @@ class Game extends hxd.App {
             s2d.filter = new h2d.filter.Nothing();
         }
 
+        engine.backgroundColor = 0xFFFFFF;
+
         hxd.Window.getInstance().addResizeEvent(onResizeEvent);
         onResizeEvent();
     }
@@ -64,6 +72,7 @@ class Game extends hxd.App {
 
     function onResizeEvent() {
         var s = hxd.Window.getInstance();
+
         var w = Std.int(s.width / Const.PIXEL_SIZE);
         var h = Std.int(s.height / Const.PIXEL_SIZE);
 

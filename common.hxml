@@ -4,12 +4,12 @@
 
 -lib heaps
 
+-lib hscript
 -lib castle
 -lib stb_ogg_sound
 
 # -lib hide
 # -lib hxbit
-# -lib hscript
 
 -main Game
 
