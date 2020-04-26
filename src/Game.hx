@@ -30,6 +30,8 @@ class Game extends hxd.App {
         configRenderer();
 
         states = new GameStateHandler(this);
+
+        // Launch with the hello world gamestate
         states.setState(new example.ExampleGameState());
     }
 
