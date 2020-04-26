@@ -30,10 +30,7 @@ class Game extends hxd.App {
         configRenderer();
 
         states = new GameStateHandler(this);
-
-        var e = hxd.Res.img.test_tilesheet.toSprite2D();
-        s2d.addChild(e);
-        e.animation.play("Smiley");
+        states.setState(new example.ExampleGameState());
     }
 
     function initEntities() {
@@ -41,11 +38,15 @@ class Game extends hxd.App {
     }
 
     function configRenderer() {
+        // Image filtering set to nearest sharp pixel graphics
+        hxd.res.Image.DEFAULT_FILTER = Nearest;
+
+        engine.backgroundColor = 0xFEFEFE;
+        engine.autoResize = true;
+
         if (Const.PIXEL_SIZE > 1) {
             s2d.filter = new h2d.filter.Nothing();
         }
-
-        engine.backgroundColor = 0xFFFFFF;
 
         hxd.Window.getInstance().addResizeEvent(onResizeEvent);
         onResizeEvent();

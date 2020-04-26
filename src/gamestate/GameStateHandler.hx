@@ -6,7 +6,7 @@ class GameStateHandler {
         return instance;
     }
 
-    public var currentState(default, set) : GameState;
+    var currentState : GameState;
 
     var game : Game;
 
@@ -28,7 +28,7 @@ class GameStateHandler {
         }
     }
 
-    function set_currentState(s : GameState) {
+    public function setState(s : GameState) {
         if (currentState != null) {
             currentState.onLeave();
         }
@@ -37,6 +37,6 @@ class GameStateHandler {
 
         s.onEnter();
 
-        return currentState = s;
+        currentState = s;
     }
 }

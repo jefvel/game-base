@@ -6,7 +6,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 100
+    "duration": 500
    },
    {
     "filename": "test 1.aseprite",
@@ -15,11 +15,20 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
     "sourceSize": { "w": 32, "h": 32 },
-    "duration": 100
+    "duration": 500
    },
    {
     "filename": "test 2.aseprite",
     "frame": { "x": 0, "y": 33, "w": 32, "h": 32 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
+    "sourceSize": { "w": 32, "h": 32 },
+    "duration": 2000
+   },
+   {
+    "filename": "test 3.aseprite",
+    "frame": { "x": 33, "y": 33, "w": 32, "h": 32 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 32, "h": 32 },
@@ -35,8 +44,8 @@
   "size": { "w": 65, "h": 65 },
   "scale": "1",
   "frameTags": [
-   { "name": "Ok", "from": 0, "to": 1, "direction": "forward" },
-   { "name": "Smiley", "from": 2, "to": 2, "direction": "forward" }
+   { "name": "Ok", "from": 0, "to": 2, "direction": "forward" },
+   { "name": "Smiley", "from": 3, "to": 3, "direction": "forward" }
   ]
  }
 }

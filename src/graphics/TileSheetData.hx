@@ -124,11 +124,11 @@ class TileSheetData extends hxd.res.Resource {
 		return this;
 	}
 
-	public function toSprite3D() : graphics.Sprite3D {
-		return new graphics.Sprite3D(this);
+	public function toSprite3D(?parent) : graphics.Sprite3D {
+		return new graphics.Sprite3D(this, parent);
 	}
 
-	public function toSprite2D() : graphics.Sprite {
-		return new graphics.Sprite(this);
+	public function toSprite2D(?parent) : graphics.Sprite {
+		return new graphics.Sprite(this, parent);
 	}
 }
