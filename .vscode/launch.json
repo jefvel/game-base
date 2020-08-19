@@ -13,20 +13,10 @@
 			"preLaunchTask": "HeapsJS"
 		},
 		{
-			"name": "HashLink SDL",
+			"name": "HashLink",
 			"request": "launch",
 			"type": "hl",
-			"hxml": "build_sdl.hxml",
 			"cwd": "${workspaceRoot}",
-			"preLaunchTask": "HeapsHL.SDL"
-		},
-		{
-			"name": "HashLink DirectX",
-			"request": "launch",
-			"type": "hl",
-			"hxml": "build_dx.hxml",
-			"cwd": "${workspaceRoot}",
-			"preLaunchTask": "HeapsHL.DX"
-		},
+		}
     ]
 }
