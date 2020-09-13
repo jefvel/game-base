@@ -1,4 +1,5 @@
 package gamestate;
+import T;
 
 class GameStateHandler {
     static var instance : GameStateHandler;

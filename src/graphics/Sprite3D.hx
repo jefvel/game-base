@@ -94,7 +94,6 @@ class Sprite3D extends Mesh {
         this.faceZAxis = true;
         this.plane = Plane3D.get();
 
-
         mat = Material.create(tileSheet.image.getTexture());
         mat.textureShader.killAlpha = true;
         mat.mainPass.addShader(new SpriteShader());
