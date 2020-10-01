@@ -1,5 +1,6 @@
 package;
 
+import sound.Sounds;
 import gamestate.GameStateHandler;
 
 class Game extends hxd.App {
@@ -19,8 +20,10 @@ class Game extends hxd.App {
      */
     public var screenHeight : Int;
 
-    var entities : entity.Entities;
-    var states : gamestate.GameStateHandler;
+	public var entities:entity.Entities;
+	public var states:gamestate.GameStateHandler;
+
+	public var sound:Sounds;
 
     override function init() {
         super.init();
@@ -28,6 +31,8 @@ class Game extends hxd.App {
 
         initEntities();
         configRenderer();
+
+		sound = new Sounds();
 
         states = new GameStateHandler(this);
 
@@ -66,7 +71,7 @@ class Game extends hxd.App {
 
         timeAccumulator += dt;
         while (timeAccumulator > Const.TICK_TIME && maxTicksPerUpdate > 0) {
-            timeAccumulator -= dt;
+			timeAccumulator -= Const.TICK_TIME;
             states.update(Const.TICK_TIME);
             entities.update(Const.TICK_TIME);
             maxTicksPerUpdate --;

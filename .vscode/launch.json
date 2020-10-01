@@ -5,18 +5,26 @@
 	"version": "2.0.0",
     "configurations": [
 		{
+			"name": "Chrome WebGL",
 			"type": "chrome",
 			"request": "launch",
-			"name": "Chrome WebGL",
 			"url": "${workspaceFolder}/build/web/index.html",
 			"webRoot": "${workspaceFolder}/build/web",
 			"preLaunchTask": "HeapsJS"
 		},
 		{
-			"name": "HashLink",
+			"name": "HashLink(SDL)",
 			"request": "launch",
 			"type": "hl",
 			"cwd": "${workspaceRoot}",
+			"preLaunchTask": "HeapsHL.SDL"
+		},
+		{
+			"name": "HashLink(DirectX)",
+			"request": "launch",
+			"type": "hl",
+			"cwd": "${workspaceRoot}",
+			"preLaunchTask": "HeapsHL.DX"
 		}
     ]
 }

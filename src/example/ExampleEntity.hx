@@ -1,8 +1,8 @@
 package example;
 
-import entity.Entity;
+import entity.Entity3D;
 
-class ExampleEntity extends Entity {
+class ExampleEntity extends Entity3D {
     var sprite : graphics.Sprite3D;
     public function new(?parent) {
         super(parent);
