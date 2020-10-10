@@ -23,6 +23,6 @@ hxd.Res.img.testcharacter_tilesheet.toSprite2D(); // Creates a h2d.Bitmap type o
 hxd.Res.img.testcharacter_tilesheet.toSprite3D(); // Creates a 3D billboard type mesh for h3d.
 ```
 
-* Comes with fonts created by [somepx]<https://twitter.com/somepx> *
+* Comes with fonts created by [somepx](https://twitter.com/somepx) *
 
 I will write more about this later
