@@ -16,10 +16,10 @@ class ExampleGameState extends elke.gamestate.GameState {
 	public function new() {}
 	var e:ExampleEntity;
 
+	var text:Text;
+
 	override function onEnter() {
 		super.onEnter();
-		game.pixelSize = 2;
-		game.engine.backgroundColor = 0xFFFFFF;
 
 		container = new Object(game.s2d);
 
@@ -37,6 +37,7 @@ class ExampleGameState extends elke.gamestate.GameState {
 
 		var t = new Text(hxd.Res.fonts.futilepro_medium_12.toFont(), game.s2d);
 		t.text = "Hello";
+		t.textAlign = Center;
 		t.textColor = 0x000000;
 		t.x = t.y = 32;
 		t.dropShadow = {
@@ -45,6 +46,9 @@ class ExampleGameState extends elke.gamestate.GameState {
 			color: 0x333333,
 			alpha: 0.2,
 		}
+
+		text = t;
+		text.scale(2);
 
 		var p = ReverbPreset.CITY_ABANDONED;
 		game.sound.sfxChannel.addEffect(new hxd.snd.effect.Reverb(p));
@@ -63,8 +67,9 @@ class ExampleGameState extends elke.gamestate.GameState {
 		super.update(dt);
 		time += dt;
 		game.s3d.camera.pos.set(0 + Math.sin(time * 0.5), 20.0 + Math.sin(time * 0.8) * 0.4, 2.0 + Math.cos(time * 0.4) * 0.1);
-		e.scaleX = Math.sin(time * 1.3);
-		e.scaleY = Math.cos(time * 2.3);
+		text.x = Math.round(game.s2d.width * 0.5);
+		text.y = 32 + Math.round(Math.sin(time * 4.3) * 2);
+		text.rotation = Math.cos(time * 1.6) * 0.1;
 	}
 
 	override function onLeave() {

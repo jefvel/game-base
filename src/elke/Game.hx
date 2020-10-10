@@ -5,6 +5,14 @@ import elke.sound.Sounds;
 import elke.gamestate.GameStateHandler;
 import elke.entity.Entities;
 
+typedef GameInitConf = {
+	?initialState:GameState,
+	?pixelSize:Int,
+	?tickRate:Int,
+	?onInit:Void->Void,
+	?backgroundColor:Int,
+}
+
 class Game extends hxd.App {
     public static var instance(default, null):Game;
     
@@ -36,8 +44,7 @@ class Game extends hxd.App {
     /**
      * size of window pixels. scale of window.
      */
-    public var pixelSize(default, set):Int;
-
+	public var pixelSize(default, set):Int;
     function set_pixelSize(size) {
         if (s2d != null) {
             if (size > 1) {
@@ -59,16 +66,20 @@ class Game extends hxd.App {
      * updates per second
      */
     public var tickRate(default, set) = 60;
-    var tickTime : Float = 1 / 60.;
+	public var tickTime:Float = 1 / 60.;
     function set_tickRate(r : Int) {
-        tickTime = 1. / 60.;
+		tickTime = 1. / r;
         return tickRate = r;
     }
 
     var initialState : GameState;
-    public function new(initialState : GameState = null) {
+	var onInit:Void->Void;
+
+	var conf:GameInitConf;
+
+	public function new(?conf:GameInitConf) {
         super();
-        this.initialState = initialState;
+		this.conf = conf;
     }
 
     override function init() {
@@ -84,10 +95,35 @@ class Game extends hxd.App {
 
         states = new GameStateHandler(this);
         
-        if (initialState != null) {
-            states.setState(initialState);
+		runInitConf();
+	}
+
+	function runInitConf() {
+		if (conf == null) {
+			return;
+		}
+
+		if (conf.initialState != null) {
+			states.setState(conf.initialState);
             initialState = null;
         }
+		if (conf.onInit != null) {
+			conf.onInit();
+		}
+
+		if (conf.pixelSize != null) {
+			pixelSize = conf.pixelSize;
+		}
+
+		if (conf.tickRate != null) {
+			tickRate = conf.tickRate;
+		}
+
+		if (conf.backgroundColor != null) {
+			engine.backgroundColor = conf.backgroundColor;
+		}
+
+		conf = null;
     }
 
     function initEntities() {

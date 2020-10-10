@@ -40,11 +40,11 @@ class T {
 		return x * x * x * (x * (x * 6. - 15.) + 10.);
 	}
 
-	public static inline function tickLerp(from:Float, to:Float, sharpness = 0.3, dt = Const.TICK_TIME) {
+	public static inline function tickLerp(from:Float, to:Float, sharpness = 0.3, scale = 1.0) {
 		var d = to - from;
 		var s = sharpness;
-		if (dt != Const.TICK_TIME)
-			s = 1.0 - Math.pow(1.0 - sharpness, dt / Const.TICK_TIME);
+		if (scale != 1.0)
+			s = 1.0 - Math.pow(1.0 - sharpness, scale);
 
 		return from + d * s;
 	}
