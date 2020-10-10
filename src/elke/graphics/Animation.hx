@@ -2,6 +2,12 @@ package elke.graphics;
 
 import elke.res.TileSheetRes;
 
+typedef AnimationEvent = {
+	frame:Int,
+	type:String,
+	name:String,
+}
+
 class Animation {
 	public var tileSheet:TileSheetRes;
 	public var playing:Bool;
@@ -9,18 +15,19 @@ class Animation {
 	public var finished:Bool;
 
 	public var currentFrame:Int = 0;
-	public var currentAnimationName:String;
+	public var currentAnimationName:AnimationId;
 
 	var elapsedTime:Float;
 	var totalElapsed:Float;
 
-	public var events:Array<TileSheetEvent>;
+	public var events:Array<AnimationEvent>;
 
 	public function new(tileSheet) {
 		this.tileSheet = tileSheet;
+		events = [];
 	}
 
-	public function play(?animation:String, ?loop:Bool = true, ?force = false, ?percentage = 0.0) {
+	public function play(?animation:AnimationId, ?loop:Bool = true, ?force = false, ?percentage = 0.0) {
 		if (!force) {
 			if (playing && animation == currentAnimationName && !finished) {
 				return;

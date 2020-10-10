@@ -30,6 +30,8 @@ typedef TileSheetConfig = {
 	events : Array<TileSheetEvent>,
 }
 
+typedef AnimationId = String;
+
 class TileSheetRes extends hxd.res.Resource {
 
 	static var ENABLE_AUTO_WATCH = true;
@@ -37,7 +39,7 @@ class TileSheetRes extends hxd.res.Resource {
 	var loaded = false;
 	public var image : h2d.Tile;
 	public var frames : Array<Frame>;
-	public var animations : Map<String, AnimationData>;
+	public var animations:Map<AnimationId, AnimationData>;
 
 	public var width(default, null) : Int;
 	public var height(default, null) : Int;
@@ -55,7 +57,7 @@ class TileSheetRes extends hxd.res.Resource {
 		}
 	}
 
-	public inline function getAnimation(?animation : String) {
+	public inline function getAnimation(?animation:AnimationId) {
 		if (animations[animation] == null) {
 			return null;
 		}
@@ -75,7 +77,7 @@ class TileSheetRes extends hxd.res.Resource {
 
 		this.frames = [];
 		this.tiles = [];
-		this.animations = new Map<String, AnimationData>();
+		this.animations = new Map<AnimationId, AnimationData>();
 		var data : AseFile = haxe.Json.parse(entry.getText());
 		var basePath = entry.path.substr(0, entry.path.length - ".tilesheet".length);
 

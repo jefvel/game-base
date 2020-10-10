@@ -1,5 +1,6 @@
 package gamestates;
 
+import h3d.scene.World;
 import h3d.scene.Object;
 import elke.process.Timeout;
 import hxd.snd.effect.ReverbPreset;
@@ -23,7 +24,7 @@ class ExampleGameState extends elke.gamestate.GameState {
 		game.s3d.lightSystem.ambientLight.set(1, 1, 1);
 
 		coolEntity = [];
-		for (_ in 0...10000) {
+		for (_ in 0...2000) {
 			var e = new entities.ExampleEntity(container);
 			var s = 10;
 			e.x = Math.random() * s * 2 - s;
@@ -42,17 +43,14 @@ class ExampleGameState extends elke.gamestate.GameState {
 			alpha: 0.2,
 		}
 
-		Transition.to(() -> {}, 0, 0.3);
 		var p = ReverbPreset.CITY_ABANDONED;
 		game.sound.sfxChannel.addEffect(new hxd.snd.effect.Reverb(p));
-		new Timeout(5.0, () -> {
-			Transition.to(() -> {});
-		});
 	}
 
 	override function onEvent(e:Event) {
 		if (e.kind == EPush) {
 			game.sound.playWobble(hxd.Res.sound.click, .1);
+			Transition.to(() -> {}, 0.4, 0.4);
 		}
 	}
 
@@ -61,7 +59,7 @@ class ExampleGameState extends elke.gamestate.GameState {
 	override function update(dt:Float) {
 		super.update(dt);
 		time += dt;
-		game.s3d.camera.pos.set(0 + Math.sin(time * 0.5), 10.0 + Math.sin(time * 0.8) * 0.4, 2.0);
+		game.s3d.camera.pos.set(0 + Math.sin(time * 0.5), 20.0 + Math.sin(time * 0.8) * 0.4, 2.0 + Math.cos(time * 0.4) * 0.1);
 	}
 
 	override function onLeave() {

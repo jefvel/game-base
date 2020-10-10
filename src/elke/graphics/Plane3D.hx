@@ -81,12 +81,6 @@ class Plane3D extends h3d.prim.Primitive {
 		return b;
 	}
 
-	override function render(engine:h3d.Engine) {
-		if (buffer == null || buffer.isDisposed())
-			alloc(engine);
-		engine.renderQuadBuffer(buffer);
-	}
-
 	public static function get() {
 		var engine = h3d.Engine.getCurrent();
 		var inst = @:privateAccess engine.resCache.get(Plane3D);

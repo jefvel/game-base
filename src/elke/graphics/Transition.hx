@@ -8,10 +8,25 @@ import h2d.Bitmap;
 import h2d.Tile;
 import hxd.Math;
 
-class DissolveShader extends h3d.shader.ScreenShader {
+class WipeShader extends h3d.shader.ScreenShader {
 	static var SRC = {
+		/**
+		 * t goes from 0-1 (fading in) to 1-2 (fading out)
+		 */
 		@param var t:Float;
 		@param var screenSize:Vec2;
+		@param var wipeColor:Vec3;
+		function fragment() {
+			var c = vec4(wipeColor, 0.0);
+			var a = 1.0 - abs(t - 1.0);
+			c.a = a;
+			output.color = c;
+		}
+	};
+}
+
+class CircleWipeShader extends WipeShader {
+	static var SRC = {
 		function fragment() {
 			var uv = (input.uv - 0.5) * 2.0;
 
@@ -25,10 +40,11 @@ class DissolveShader extends h3d.shader.ScreenShader {
 			tMod -= 0.01;
 
 			var p2 = tMod * d;
+			p2 *= 1.02;
 
-			var l = mult + sign * clamp((p - p2) * 99.9, 0, 1);
+			var l = mult + sign * clamp((p - p2) * 129.9, 0, 1);
 
-			var c = vec3(0.019, 0.09, 0.16);
+			var c = wipeColor;
 			c *= l;
 
 			output.color = vec4(c, l);
@@ -36,45 +52,65 @@ class DissolveShader extends h3d.shader.ScreenShader {
 	};
 }
 
-class DissolveFx extends ScreenFx<DissolveShader> {
-	public function new() {
-		super(new DissolveShader());
-	}
+class SideWipeShader extends WipeShader {
+	static var SRC = {
+		function fragment() {
+			var uv = (input.uv - 0.5) * 2.0;
+
+			var d = length(vec2(1.0, (screenSize.y / screenSize.x)));
+
+			var sign = clamp((2 * floor(t)) - 1., -1, 1);
+			var mult = (1.0 - floor(t));
+
+			var tMod = mod(t, 1);
+			tMod -= 0.01;
+
+			var p2 = tMod * d;
+			p2 *= 1.02;
+
+			var l = mult + sign * clamp(((input.uv.x + input.uv.y * 0.1) - tMod * 1.2) * 229.9, 0, 1);
+
+			var c = wipeColor;
+			c *= l;
+
+			output.color = vec4(c, l);
+		}
+	};
 }
 
 class TransitionFilter extends Filter {
+	/**
+	 * Progress goes from 0-1 (fading in) to 1-2 (fading out)
+	 */
 	public var progress:Float;
 
-	var pass = new DissolveFx();
+	var pass:ScreenFx<WipeShader>;
 
 	public function new() {
 		super();
-	}
-
-	override function sync(ctx, s) {
-		super.sync(ctx, s);
-		pass.shader.screenSize.set(ctx.scene.width, ctx.scene.height);
-		pass.shader.t = progress;
+		pass = new ScreenFx<WipeShader>(new WipeShader());
 	}
 
 	override function draw(ctx:RenderContext, t:h2d.Tile) {
+		pass.shader.screenSize.set(ctx.scene.width, ctx.scene.height);
+		pass.shader.t = progress;
 		pass.render();
 		return t;
 	}
 }
 
 class Transition extends Interactive {
-	var circGraphics:Bitmap;
+	var graphics:Bitmap;
 	var f:TransitionFilter;
 
 	var alphaFade = false;
 
-	public function new(?parent) {
+	function new(?parent) {
 		super(1, 1, parent);
-		circGraphics = new Bitmap(Tile.fromColor(0), this);
+		graphics = new Bitmap(Tile.fromColor(0), this);
 		if (!alphaFade) {
 			f = new TransitionFilter();
-			circGraphics.filter = f;
+			graphics.filter = f;
 		}
 
 		cursor = Default;
@@ -95,6 +131,7 @@ class Transition extends Interactive {
 
 	override function sync(ctx:RenderContext) {
 		super.sync(ctx);
+
 		var s = Game.instance.s2d;
 		width = s.width;
 		height = s.height;
@@ -135,14 +172,10 @@ class Transition extends Interactive {
 			}
 		}
 
-		circGraphics.width = width;
-		circGraphics.height = height;
-		
-		if (!alphaFade) {
-			f.progress = eased;
-		} else {
-			circGraphics.alpha = eased;
-		}
+		graphics.width = width;
+		graphics.height = height;
+
+		f.progress = eased;
 	}
 
 	var onFinish:Void->Void;
