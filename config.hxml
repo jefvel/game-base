@@ -7,7 +7,7 @@
 -D windowTitle=✔ Game
 -D windowSize=1280x720
 # Uncomment if you want a static sized window
--D windowFixed
+#-D windowFixed
 
 
 ## HTML/Js Specific values

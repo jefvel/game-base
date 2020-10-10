@@ -1,7 +1,9 @@
 package elke.graphics;
 
+import elke.res.TileSheetRes;
+
 class Animation {
-	public var tileSheet:TileSheetData;
+	public var tileSheet:TileSheetRes;
 	public var playing:Bool;
 	public var looping:Bool;
 	public var finished:Bool;
@@ -11,6 +13,8 @@ class Animation {
 
 	var elapsedTime:Float;
 	var totalElapsed:Float;
+
+	public var events:Array<TileSheetEvent>;
 
 	public function new(tileSheet) {
 		this.tileSheet = tileSheet;

@@ -1,5 +1,6 @@
 package gamestates;
 
+import h3d.scene.Object;
 import elke.process.Timeout;
 import hxd.snd.effect.ReverbPreset;
 import elke.graphics.Transition;
@@ -7,7 +8,8 @@ import h2d.Text;
 import hxd.Event;
 
 class ExampleGameState extends elke.gamestate.GameState {
-	var coolEntity:entities.ExampleEntity;
+	var coolEntity:Array<entities.ExampleEntity>;
+	var container:Object;
 
 	public function new() {}
 
@@ -16,7 +18,18 @@ class ExampleGameState extends elke.gamestate.GameState {
 		game.pixelSize = 2;
 		game.engine.backgroundColor = 0xFFFFFF;
 
-		coolEntity = new entities.ExampleEntity(game.s3d);
+		container = new Object(game.s3d);
+
+		game.s3d.lightSystem.ambientLight.set(1, 1, 1);
+
+		coolEntity = [];
+		for (_ in 0...10000) {
+			var e = new entities.ExampleEntity(container);
+			var s = 10;
+			e.x = Math.random() * s * 2 - s;
+			e.z = Math.random() * s * 2 - s;
+			e.y = Math.random() * s * 2 - s;
+		}
 
 		var t = new Text(hxd.Res.fonts.futilepro_medium_12.toFont(), game.s2d);
 		t.text = "Hello";
@@ -48,11 +61,10 @@ class ExampleGameState extends elke.gamestate.GameState {
 	override function update(dt:Float) {
 		super.update(dt);
 		time += dt;
-		game.s3d.camera.pos.set(0 + Math.sin(time * 0.5), 4.0 + Math.sin(time * 0.8) * 0.4, 2.0);
+		game.s3d.camera.pos.set(0 + Math.sin(time * 0.5), 10.0 + Math.sin(time * 0.8) * 0.4, 2.0);
 	}
 
 	override function onLeave() {
 		super.onLeave();
-		coolEntity.remove();
 	}
 }

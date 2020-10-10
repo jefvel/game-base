@@ -7,7 +7,7 @@ typedef RGB = {
 }
 
 /**
- * transitions
+ * Easing functions
  */
 class T {
 	static final PI2:Float = Math.PI / 2;

@@ -82,14 +82,14 @@ class Sprite3D extends Mesh {
 	var pixelateShader:hxsl.Shader;
 	var mat:h3d.mat.Material;
 
-	public function new(tileSheet:TileSheetData, ?parent:Object) {
-		this.animation = new Animation(tileSheet);
+	public function new(anim:Animation, ?parent:Object) {
+		this.animation = anim;
 
 		this.faceCamera = false;
 		this.faceZAxis = true;
 		this.plane = Plane3D.get();
 
-		mat = Material.create(tileSheet.image.getTexture());
+		mat = Material.create(anim.tileSheet.image.getTexture());
 		mat.textureShader.killAlpha = true;
 		mat.mainPass.addShader(new SpriteShader());
 		super(plane, mat, parent);

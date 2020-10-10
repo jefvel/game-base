@@ -9,7 +9,7 @@ class Config {
         hxd.res.Config.ignoredExtensions["wav.asd"] = true;
 
 		// Files with the extension .tilesheet will be able to
-		// be loaded using the TileSheetData class.
-		hxd.res.Config.extensions["tilesheet"] = "elke.graphics.TileSheetData";
+		// be loaded using the TileSheetRes class.
+		hxd.res.Config.extensions["tilesheet"] = "elke.res.TileSheetRes";
 	}
 }

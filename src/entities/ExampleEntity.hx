@@ -8,9 +8,9 @@ class ExampleEntity extends Entity3D {
 	public function new(?parent) {
 		super(parent);
 
-		sprite = hxd.Res.img.test_tilesheet.toSprite3D(this);
+		sprite = hxd.Res.img.boom_tilesheet.toSprite3D(this);
 		sprite.originX = 16;
 		sprite.originY = 16;
-		sprite.animation.play("Ok");
+		sprite.animation.play("Explosion", true, false, Math.random());
 	}
 }

@@ -25,9 +25,9 @@ class Sprite extends h2d.Bitmap {
 
 	var tiles:Array<h2d.Tile>;
 
-	public function new(tileSheet:TileSheetData, ?parent) {
+	public function new(anim, ?parent) {
 		super(null, parent);
-		animation = new Animation(tileSheet);
+		animation = anim;
 	}
 
 	var lastTile:h2d.Tile;

@@ -128,7 +128,7 @@ class Game extends hxd.App {
         while (timeAccumulator > tickTime && maxTicksPerUpdate > 0) {
             timeAccumulator -= tickTime;
 			for (p in processes) {
-				p.update(dt);
+				p.update(tickTime);
 			}
 
             states.update(tickTime);

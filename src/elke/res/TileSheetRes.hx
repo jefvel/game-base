@@ -1,5 +1,6 @@
-package elke.graphics;
+package elke.res;
 
+import elke.graphics.Animation;
 import elke.graphics.AsepriteResource;
 import elke.graphics.Sprite;
 import elke.graphics.Sprite3D;
@@ -29,7 +30,11 @@ typedef TileSheetConfig = {
 	events : Array<TileSheetEvent>,
 }
 
-class TileSheetData extends hxd.res.Resource {
+class TileSheetRes extends hxd.res.Resource {
+
+	static var ENABLE_AUTO_WATCH = true;
+
+	var loaded = false;
 	public var image : h2d.Tile;
 	public var frames : Array<Frame>;
 	public var animations : Map<String, AnimationData>;
@@ -45,11 +50,8 @@ class TileSheetData extends hxd.res.Resource {
 
 	function new(entry) {
 		super(entry);
-		this.frames = [];
-		this.tiles = [];
-		this.animations = new Map<String, AnimationData>();
 		if (entry != null) {
-			toTileSheet();
+			loadData();
 		}
 	}
 
@@ -61,7 +63,19 @@ class TileSheetData extends hxd.res.Resource {
 		return animations[animation];
 	}
 
-    public function toTileSheet() : TileSheetData {
+	function watchCallb() {
+		loadData();
+	}
+
+    function loadData() : TileSheetRes {
+		if (!loaded) {
+			if(ENABLE_AUTO_WATCH)
+				watch(watchCallb);
+		}
+
+		this.frames = [];
+		this.tiles = [];
+		this.animations = new Map<String, AnimationData>();
 		var data : AseFile = haxe.Json.parse(entry.getText());
 		var basePath = entry.path.substr(0, entry.path.length - ".tilesheet".length);
 
@@ -122,14 +136,26 @@ class TileSheetData extends hxd.res.Resource {
 			totalLength += f.duration;
 		}
 
+		loaded = true;
+
 		return this;
 	}
 
+	public function toAnimation() : Animation {
+		if (!loaded) { 
+			loadData();
+		}
+
+		return new Animation(this);
+	}
+
 	public function toSprite3D(?parent) : Sprite3D {
-		return new Sprite3D(this, parent);
+		var anim = toAnimation();
+		return new Sprite3D(anim, parent);
 	}
 
 	public function toSprite2D(?parent) : Sprite {
-		return new Sprite(this, parent);
+		var anim = toAnimation();
+		return new Sprite(anim, parent);
 	}
 }
