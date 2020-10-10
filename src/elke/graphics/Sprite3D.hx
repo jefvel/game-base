@@ -45,8 +45,6 @@ class SpriteShader extends hxsl.Shader {
 class Sprite3D extends Mesh {
 	public var animation:Animation;
 
-	public var pixelated(default, set) = true;
-
 	public var faceCamera:Bool;
 
 	/**
@@ -79,7 +77,6 @@ class Sprite3D extends Mesh {
 
 	var onEvent:(String) -> Void;
 
-	var pixelateShader:hxsl.Shader;
 	var mat:h3d.mat.Material;
 
 	public function new(anim:Animation, ?parent:Object) {
@@ -93,26 +90,8 @@ class Sprite3D extends Mesh {
 		mat.textureShader.killAlpha = true;
 		mat.mainPass.addShader(new SpriteShader());
 		super(plane, mat, parent);
-
-		// pixelateShader = new SpriteShader();
-		this.pixelated = this.pixelated;
 	}
 
-	function set_pixelated(pixelated) {
-		if (!pixelated) {
-			material.mainPass.addShader(pixelateShader);
-		} else {
-			material.mainPass.removeShader(pixelateShader);
-		}
-		return this.pixelated = pixelated;
-	}
-
-	/*
-		override function playAnimation(a:Animation):Animation { return null; }
-		override function stopAnimation(?recursive:Bool = false) {}
-		override function switchToAnimation(a:Animation):Animation { return null; }
-		override function applyAnimationTransform(recursive:Bool = true) {}
-	 */
 	var lastTile:h2d.Tile;
 
 	function refreshTile() {

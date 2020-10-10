@@ -68,7 +68,7 @@ class Animation {
 		}
 	}
 
-	inline function getCurrentFrame() {
+	public function getCurrentFrame() {
 		return tileSheet.frames[currentFrame];
 	}
 

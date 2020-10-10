@@ -105,7 +105,7 @@ class AsepriteConverter {
         var pack = '--sheet-pack';
         var listTags = '--list-tags';
         var padding = '--shape-padding $spacing';
-        var trim = ''; //'--trim';
+		var trim = '--trim';
 
         var ignoreLayers = '';
         var layers = '';

@@ -6,9 +6,6 @@ class Sprite extends h2d.Bitmap {
 
 	var dirty = false;
 
-	public var flipX(default, set):Bool;
-	public var flipY(default, set):Bool;
-
 	/**
 	 *  Horizontal origin of sprite, in pixels.
 	 *  0 = left, 1 = right
@@ -21,8 +18,6 @@ class Sprite extends h2d.Bitmap {
 	 */
 	public var originY(default, set):Int;
 
-	var pixelateShader:hxsl.Shader;
-
 	var tiles:Array<h2d.Tile>;
 
 	public function new(anim, ?parent) {
@@ -33,7 +28,8 @@ class Sprite extends h2d.Bitmap {
 	var lastTile:h2d.Tile;
 
 	function refreshTile() {
-		var t = animation.getCurrentTile();
+		var frame = animation.getCurrentFrame();
+		var t = frame.tile;
 
 		if (!dirty && t == lastTile) {
 			return;
@@ -43,6 +39,10 @@ class Sprite extends h2d.Bitmap {
 		lastTile = t;
 
 		this.tile = t;
+		if (frame != null) {
+			t.dx = frame.offsetX - originX;
+			t.dy = frame.offsetY - originY;
+		}
 	}
 
 	override function sync(ctx:h2d.RenderContext) {
@@ -54,18 +54,6 @@ class Sprite extends h2d.Bitmap {
 
 		refreshTile();
 		super.sync(ctx);
-	}
-
-	inline function set_flipX(f:Bool) {
-		if (f != flipX)
-			dirty = true;
-		return flipX = f;
-	}
-
-	inline function set_flipY(f:Bool) {
-		if (f != flipY)
-			dirty = true;
-		return flipY = f;
 	}
 
 	inline function set_originX(o:Int) {
@@ -83,7 +71,6 @@ class Sprite extends h2d.Bitmap {
 	public inline function syncWith(parent:Sprite) {
 		originX = parent.originX;
 		originY = parent.originY;
-		flipX = parent.flipX;
 
 		if (animation.currentFrame != parent.animation.currentFrame) {
 			dirty = true;

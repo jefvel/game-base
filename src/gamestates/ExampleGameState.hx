@@ -1,7 +1,8 @@
 package gamestates;
 
+import entities.ExampleEntity;
+import h2d.Object;
 import h3d.scene.World;
-import h3d.scene.Object;
 import elke.process.Timeout;
 import hxd.snd.effect.ReverbPreset;
 import elke.graphics.Transition;
@@ -13,23 +14,25 @@ class ExampleGameState extends elke.gamestate.GameState {
 	var container:Object;
 
 	public function new() {}
+	var e:ExampleEntity;
 
 	override function onEnter() {
 		super.onEnter();
 		game.pixelSize = 2;
 		game.engine.backgroundColor = 0xFFFFFF;
 
-		container = new Object(game.s3d);
+		container = new Object(game.s2d);
 
 		game.s3d.lightSystem.ambientLight.set(1, 1, 1);
 
 		coolEntity = [];
-		for (_ in 0...2000) {
-			var e = new entities.ExampleEntity(container);
+		for (_ in 0...1) {
+			e = new entities.ExampleEntity(container);
 			var s = 10;
-			e.x = Math.random() * s * 2 - s;
-			e.z = Math.random() * s * 2 - s;
-			e.y = Math.random() * s * 2 - s;
+			e.x = e.y = 32;
+			// e.x = Math.random() * s * 2 - s;
+			// e.z = Math.random() * s * 2 - s;
+			// e.y = Math.random() * s * 2 - s;
 		}
 
 		var t = new Text(hxd.Res.fonts.futilepro_medium_12.toFont(), game.s2d);
@@ -60,6 +63,8 @@ class ExampleGameState extends elke.gamestate.GameState {
 		super.update(dt);
 		time += dt;
 		game.s3d.camera.pos.set(0 + Math.sin(time * 0.5), 20.0 + Math.sin(time * 0.8) * 0.4, 2.0 + Math.cos(time * 0.4) * 0.1);
+		e.scaleX = Math.sin(time * 1.3);
+		e.scaleY = Math.cos(time * 2.3);
 	}
 
 	override function onLeave() {

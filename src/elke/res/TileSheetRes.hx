@@ -6,6 +6,8 @@ import elke.graphics.Sprite;
 import elke.graphics.Sprite3D;
 
 typedef Frame = {
+	offsetX:Int,
+	offsetY:Int,
 	tile : h2d.Tile,
 	duration:Int,
 }
@@ -101,6 +103,8 @@ class TileSheetRes extends hxd.res.Resource {
 			frames.push({
 				tile: tile.sub(f.frame.x, f.frame.y, f.frame.w, f.frame.h, dx, dy),
 				duration: f.duration,
+				offsetX: dx,
+				offsetY: dy,
 			});
 		}
 
