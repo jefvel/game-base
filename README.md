@@ -24,5 +24,3 @@ hxd.Res.img.testcharacter_tilesheet.toSprite3D(); // Creates a 3D billboard type
 ```
 
 *Comes with fonts created by [somepx](https://twitter.com/somepx)*
-
-I will write more about this later
