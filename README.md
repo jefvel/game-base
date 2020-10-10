@@ -8,9 +8,9 @@ Some current features:
 
 * Possibility to set 2D pixel size for the screen.
 
-* Extremely simple entity and gamestate system with fixed timestep updates.
+* Simple entity and gamestate system with fixed timestep updates.
 
-* A HTML template file that gets exported along with the js output. Build and zip it and you're done.
+* A HTML template file that gets exported along with the js output.
 
 * The release JS build uses the Google closure js minifier.
 
@@ -19,8 +19,10 @@ Some current features:
 * The .tilesheet file can be accessed using the resource system:
 
 ```haxe
-hxd.Res.img.testcharacter_tilesheet.toSprite(); // Creates a h2d.Bitmap type object with animation support
+hxd.Res.img.testcharacter_tilesheet.toSprite2D(); // Creates a h2d.Bitmap type object with animation support
 hxd.Res.img.testcharacter_tilesheet.toSprite3D(); // Creates a 3D billboard type mesh for h3d.
 ```
+
+* Comes with fonts created by [somepx]<https://twitter.com/somepx> *
 
 I will write more about this later

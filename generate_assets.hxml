@@ -4,4 +4,4 @@
 # This will look for .aseprite files, and then export them,
 # either as single pngs if they contain one frame, or a png + tilesheet
 # when there are more than one frame.
---macro buildutil.AsepriteConverter.exportTileSheets()
+--macro elke.buildutil.AsepriteConverter.exportTileSheets()

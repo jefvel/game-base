@@ -3,4 +3,4 @@ common.hxml
 -debug
 
 -js build/web/game.js
---macro buildutil.Generate.generateWeb()
+--macro elke.buildutil.WebGenerator.generate()

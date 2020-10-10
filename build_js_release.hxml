@@ -8,4 +8,4 @@ common.hxml
 -D no_traces
 
 -js build/web/game.js
---macro buildutil.Generate.generateWeb()
+--macro elke.buildutil.WebGenerator.generate()

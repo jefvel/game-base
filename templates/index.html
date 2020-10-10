@@ -1,6 +1,17 @@
 <html>
 <head>
 	<meta charset="utf-8" />
+
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:site" content="::twitterSite::" />
+	<meta name="twitter:creator" content="::twitterCreator::" />
+
+	<meta property="og:title" content="::windowTitle::" />
+	<meta property="og:url" content="::ogUrl::" />
+	<meta property="og:description" content="::ogDescription::" />
+	<meta property="og:image" content="::ogImage::" />
+
+	<meta name="msapplication-tap-highlight" content="no" />
 	<title>::windowTitle::</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 </head>
@@ -20,16 +31,13 @@
 			padding: 0; 
 			height: 100%; 
 			overflow: hidden;
-			background-color: #cecece;
 		}
 
 		canvas#webgl {
 			width: 100% !important;
 			height: 100% !important;
 		}
-
-		::additionalCss::
-
 	</style>
+	::additionalCss::
 </body>
 </html>
