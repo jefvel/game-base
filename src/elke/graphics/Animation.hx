@@ -42,7 +42,7 @@ class Animation {
 
 		var anim = tileSheet.getAnimation(animation);
 		if (animation != null && anim == null) {
-			// throw "Could not find animation " + animation + " in sheet " + tileSheet.name;
+			throw 'Could not find animation $animation in sheet ${tileSheet.name}';
 		} else if (anim != null) {
 			currentFrame = anim.from;
 		}

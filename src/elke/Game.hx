@@ -1,5 +1,8 @@
 package elke;
 
+import h2d.Console;
+import elke.input.InputHandler;
+import h3d.prim.ModelCache;
 import elke.gamestate.GameState;
 import elke.sound.Sounds;
 import elke.gamestate.GameStateHandler;
@@ -28,9 +31,15 @@ class Game extends hxd.App {
     public var screenHeight : Int;
 
 	public var entities:Entities;
-	public var states:GameStateHandler;
+    public var states:GameStateHandler;
+
+    public var console: Console;
+    
+	public var inputHandler:InputHandler;
 
     public var sound:Sounds;
+
+	public var modelCache:ModelCache;
     
 	/**
 	 *  mouse x in scaled screen pixels
@@ -44,7 +53,7 @@ class Game extends hxd.App {
     /**
      * size of window pixels. scale of window.
      */
-	public var pixelSize(default, set):Int;
+    public var pixelSize(default, set):Int;
     function set_pixelSize(size) {
         if (s2d != null) {
             if (size > 1) {
@@ -72,9 +81,6 @@ class Game extends hxd.App {
         return tickRate = r;
     }
 
-    var initialState : GameState;
-	var onInit:Void->Void;
-
 	var conf:GameInitConf;
 
 	public function new(?conf:GameInitConf) {
@@ -91,7 +97,9 @@ class Game extends hxd.App {
         initEntities();
         configRenderer();
 
-		sound = new Sounds();
+        sound = new Sounds();
+        
+		modelCache = new ModelCache();
 
         states = new GameStateHandler(this);
         
@@ -105,8 +113,8 @@ class Game extends hxd.App {
 
 		if (conf.initialState != null) {
 			states.setState(conf.initialState);
-            initialState = null;
         }
+
 		if (conf.onInit != null) {
 			conf.onInit();
 		}

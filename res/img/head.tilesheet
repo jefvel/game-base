@@ -1,0 +1,97 @@
+{ "frames": [
+   {
+    "filename": "head 0.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 14, "h": 15 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 1, "y": 1, "w": 14, "h": 15 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 3500
+   },
+   {
+    "filename": "head 1.aseprite",
+    "frame": { "x": 15, "y": 0, "w": 14, "h": 15 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 1, "y": 1, "w": 14, "h": 15 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 100
+   },
+   {
+    "filename": "head 2.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 14, "h": 15 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 1, "y": 1, "w": 14, "h": 15 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 5000
+   },
+   {
+    "filename": "head 3.aseprite",
+    "frame": { "x": 15, "y": 0, "w": 14, "h": 15 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 1, "y": 1, "w": 14, "h": 15 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 100
+   },
+   {
+    "filename": "head 4.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 14, "h": 15 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 1, "y": 1, "w": 14, "h": 15 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 4000
+   },
+   {
+    "filename": "head 5.aseprite",
+    "frame": { "x": 30, "y": 0, "w": 14, "h": 15 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 1, "y": 1, "w": 14, "h": 15 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 350
+   },
+   {
+    "filename": "head 6.aseprite",
+    "frame": { "x": 15, "y": 0, "w": 14, "h": 15 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 1, "y": 1, "w": 14, "h": 15 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 100
+   },
+   {
+    "filename": "head 7.aseprite",
+    "frame": { "x": 0, "y": 16, "w": 14, "h": 15 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 1, "y": 1, "w": 14, "h": 15 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 3500
+   },
+   {
+    "filename": "head 8.aseprite",
+    "frame": { "x": 15, "y": 16, "w": 14, "h": 15 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 1, "y": 1, "w": 14, "h": 15 },
+    "sourceSize": { "w": 16, "h": 16 },
+    "duration": 3500
+   }
+ ],
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.2.25-x64",
+  "image": "head.png",
+  "format": "RGBA8888",
+  "size": { "w": 44, "h": 31 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "Idle", "from": 0, "to": 6, "direction": "forward" },
+   { "name": "IdleBehind", "from": 7, "to": 7, "direction": "forward" },
+   { "name": "Aim", "from": 8, "to": 8, "direction": "forward" }
+  ]
+ }
+}

@@ -157,7 +157,7 @@ class TileSheetRes extends hxd.res.Resource {
 
 	public function toSprite3D(?parent) : Sprite3D {
 		var anim = toAnimation();
-		return new Sprite3D(anim, parent);
+		return new Sprite3D(anim, null, parent);
 	}
 
 	public function toSprite2D(?parent) : Sprite {
