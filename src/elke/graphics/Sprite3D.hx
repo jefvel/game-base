@@ -56,20 +56,20 @@ class Sprite3D extends Mesh {
 
 	var dirty = false;
 
-	public var flipX(default, set):Bool;
-	public var flipY(default, set):Bool;
+	public var flipX(default, set):Bool = false;
+	public var flipY(default, set):Bool = false;
 
 	/**
 	 *  Horizontal origin of sprite, in pixels.
 	 *  0 = left, 1 = right
 	 */
-	public var originX(default, set):Int;
+	public var originX(default, set):Int = 0;
 
 	/**
 	 *  Vertical origin of sprite, in pixels.
 	 *  0 = top, 1 = bottom
 	 */
-	public var originY(default, set):Int;
+	public var originY(default, set):Int = 0;
 
 	var ppu:Float = Const.PPU;
 

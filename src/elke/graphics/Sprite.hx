@@ -10,13 +10,13 @@ class Sprite extends h2d.Bitmap {
 	 *  Horizontal origin of sprite, in pixels.
 	 *  0 = left, 1 = right
 	 */
-	public var originX(default, set):Int;
+	public var originX(default, set):Int = 0;
 
 	/**
 	 *  Vertical origin of sprite, in pixels.
 	 *  0 = top, 1 = bottom
 	 */
-	public var originY(default, set):Int;
+	public var originY(default, set):Int = 0;
 
 	var tiles:Array<h2d.Tile>;
 
