@@ -22,12 +22,14 @@ class Animation {
 
 	public var events:Array<AnimationEvent>;
 
+	var onFinish : String -> Void;
+
 	public function new(tileSheet) {
 		this.tileSheet = tileSheet;
 		events = [];
 	}
 
-	public function play(?animation:AnimationId, ?loop:Bool = true, ?force = false, ?percentage = 0.0) {
+	public function play(?animation:AnimationId, ?loop:Bool = true, ?force = false, ?percentage = 0.0, ?onFinish: String->Void) {
 		if (!force) {
 			if (playing && animation == currentAnimationName && !finished) {
 				return;
@@ -39,6 +41,8 @@ class Animation {
 		looping = loop;
 		elapsedTime = 0.0;
 		totalElapsed = 0.0;
+
+		this.onFinish = onFinish;
 
 		var anim = tileSheet.getAnimation(animation);
 		if (animation != null && anim == null) {
@@ -131,8 +135,12 @@ class Animation {
 				}
 			} else {
 				if (currentFrame > to) {
-					currentFrame = to - 1;
+					currentFrame = to;
 					finished = true;
+					if (onFinish != null) {
+						onFinish(currentAnimationName);
+						onFinish = null;
+					}
 				}
 			}
 		}
