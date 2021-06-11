@@ -28,6 +28,14 @@ typedef TileSheetEvent = {
 	name : String,
 }
 
+typedef Slice = {
+	name: String,
+	keys :	Array<{
+		frame: Int,
+		bounds: AseBound,
+	}>
+}
+
 typedef TileSheetConfig = {
 	events : Array<TileSheetEvent>,
 }
@@ -42,6 +50,8 @@ class TileSheetRes extends hxd.res.Resource {
 	public var image : h2d.Tile;
 	public var frames : Array<Frame>;
 	public var animations:Map<AnimationId, AnimationData>;
+	
+	public var slices: Map<String, Slice>;
 
 	public var width(default, null) : Int;
 	public var height(default, null) : Int;
@@ -80,6 +90,8 @@ class TileSheetRes extends hxd.res.Resource {
 		this.frames = [];
 		this.tiles = [];
 		this.animations = new Map<AnimationId, AnimationData>();
+		this.slices = new Map<String, Slice>();
+
 		var data : AseFile = haxe.Json.parse(entry.getText());
 		var basePath = entry.path.substr(0, entry.path.length - ".tilesheet".length);
 
@@ -130,6 +142,15 @@ class TileSheetRes extends hxd.res.Resource {
 					}
 
 					s.totalLength += frames[i + s.from].duration;
+				}
+			}
+		}
+
+		if (data.meta.slices != null) {
+			for (s in data.meta.slices) {
+				slices[s.name] = {
+					name: s.name,
+					keys: s.keys,
 				}
 			}
 		}

@@ -20,6 +20,13 @@ typedef AseSize = {
 	h:Int
 }
 
+typedef AseBound = {
+	w: Int,
+	h: Int,
+	x: Int,
+	y: Int,
+}
+
 typedef AseAnimation = {
 	name:String,
 	from:Int,
@@ -37,11 +44,23 @@ typedef AseLayer = {
 	blendMode : String,
 }
 
+typedef AseSlice = {
+	name: String,
+	color: String,
+	keys: Array<AseSliceKey>,
+}
+
+typedef AseSliceKey = {
+	frame: Int,
+	bounds: AseBound,
+}
+
 typedef AseMeta = {
 	frameTags : Array<AseAnimation>,
 	size : AseSize,
 	scale : Float,
 	layers : Array<AseLayer>,
+	slices: Array<AseSlice>,
 }
 
 typedef AseFile = {

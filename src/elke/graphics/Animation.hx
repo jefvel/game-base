@@ -72,6 +72,21 @@ class Animation {
 		}
 	}
 
+	public function getSlice(name: String) {
+		var s = tileSheet.slices[name];
+		if (s == null) {
+			return null;
+		}
+
+		for (k in s.keys) {
+			if (k.frame == currentFrame) {
+				return k.bounds;
+			}
+		}
+
+		return null;
+	}
+
 	public function getCurrentFrame() {
 		return tileSheet.frames[currentFrame];
 	}

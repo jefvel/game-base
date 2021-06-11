@@ -105,7 +105,7 @@ class Transition extends Interactive {
 
 	var alphaFade = false;
 
-	function new(?parent) {
+	public function new(?parent) {
 		super(1, 1, parent);
 		graphics = new Bitmap(Tile.fromColor(0), this);
 		if (!alphaFade) {
@@ -121,7 +121,9 @@ class Transition extends Interactive {
 
 	override function draw(ctx:RenderContext) {
 		super.draw(ctx);
-		parent.addChild(this);
+		if (auto) {
+			parent.addChild(this);
+		}
 	}
 
 	public var inTime = .5;
@@ -187,9 +189,12 @@ class Transition extends Interactive {
 		this.onFinish = onFinish;
 	}
 
-	public function hide(?onFinish:Void->Void) {
+	public function hide(?onFinish:Void->Void, reset = false) {
 		this.onFinish = onFinish;
 		scalingOut = true;
+		if (reset) {
+			t = 1.0;
+		}
 	}
 
 	public static function to(onFinish:Void->Void, inTime = 0.5, outTime = 0.6) {

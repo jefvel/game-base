@@ -106,6 +106,7 @@ class AsepriteConverter {
         var listTags = '--list-tags';
         var padding = '--shape-padding $spacing';
 		var trim = '--trim';
+        var slices = '--list-slices';
 
         var ignoreLayers = '';
         var layers = '';
@@ -135,7 +136,7 @@ class AsepriteConverter {
             }
         }
 
-        var cmd = '"$asePath" $jsonOutput $pngOutput $format $type $pack $padding $listTags $trim $layers $ignoreLayers';
+        var cmd = '"$asePath" $jsonOutput $pngOutput $format $type $pack $padding $slices $listTags $trim $layers $ignoreLayers';
         cmd += ' $input';
 
         l = ++l % loaders.length;

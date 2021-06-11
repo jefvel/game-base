@@ -145,10 +145,15 @@ class Game extends hxd.App {
         // Image filtering set to nearest sharp pixel graphics
         hxd.res.Image.DEFAULT_FILTER = Nearest;
 
+		#if js
+		hxd.Window.getInstance().useScreenPixels = false;
+		#end
+
         engine.autoResize = true;
 
         onResize();
     }
+
 
     var timeAccumulator = 0.0;
     override function update(dt:Float) {
@@ -195,5 +200,7 @@ class Game extends hxd.App {
 #else
         hxd.Res.initEmbed();
 #end
+        // Load CastleDB data.
+        Data.load(hxd.Res.data.entry.getText());
     }
 }
