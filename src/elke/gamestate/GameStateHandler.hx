@@ -1,5 +1,6 @@
 package elke.gamestate;
 
+import h3d.Engine;
 import elke.Game;
 
 class GameStateHandler {
@@ -28,6 +29,12 @@ class GameStateHandler {
 	function onEvent(e:hxd.Event) {
 		if (currentState != null) {
 			currentState.onEvent(e);
+		}
+	}
+
+	public function onRender(e: Engine) {
+		if (currentState != null) {
+			currentState.onRender(e);
 		}
 	}
 

@@ -10,6 +10,7 @@ import hxd.Math;
 
 class WipeShader extends h3d.shader.ScreenShader {
 	static var SRC = {
+		@param var texture : Sampler2D;
 		/**
 		 * t goes from 0-1 (fading in) to 1-2 (fading out)
 		 */
@@ -73,6 +74,7 @@ class SideWipeShader extends WipeShader {
 			var c = wipeColor;
 			c *= l;
 
+			//output.color = texture.get(input.uv) * vec4(c, 1);
 			output.color = vec4(c, l);
 		}
 	};
@@ -83,25 +85,33 @@ class TransitionFilter extends Filter {
 	 * Progress goes from 0-1 (fading in) to 1-2 (fading out)
 	 */
 	public var progress:Float;
-
-	var pass:ScreenFx<WipeShader>;
+	public var wipeFilter:ScreenFx<WipeShader>;
 
 	public function new() {
 		super();
-		pass = new ScreenFx<WipeShader>(new WipeShader());
+		wipeFilter = new ScreenFx<WipeShader>(new WipeShader());
+	}
+
+	public function setWipeShader(s: WipeShader) {
+		wipeFilter = new ScreenFx<WipeShader>(s);
 	}
 
 	override function draw(ctx:RenderContext, t:h2d.Tile) {
-		pass.shader.screenSize.set(ctx.scene.width, ctx.scene.height);
-		pass.shader.t = progress;
-		pass.render();
-		return t;
+		var out = ctx.textures.allocTileTarget("transitionOutput", t);
+		ctx.engine.pushTarget(out);
+		var s = wipeFilter.shader;
+		s.screenSize.set(ctx.scene.width, ctx.scene.height);
+		s.t = progress;
+		s.texture = t.getTexture();
+		wipeFilter.render();
+		ctx.engine.popTarget();
+		return h2d.Tile.fromTexture(out);
 	}
 }
 
 class Transition extends Interactive {
 	var graphics:Bitmap;
-	var f:TransitionFilter;
+	public var f:TransitionFilter;
 
 	var alphaFade = false;
 
@@ -110,6 +120,7 @@ class Transition extends Interactive {
 		graphics = new Bitmap(Tile.fromColor(0), this);
 		if (!alphaFade) {
 			f = new TransitionFilter();
+			//Game.instance.uiScene.filter = f;
 			graphics.filter = f;
 		}
 
@@ -134,7 +145,11 @@ class Transition extends Interactive {
 	override function sync(ctx:RenderContext) {
 		super.sync(ctx);
 
-		var s = Game.instance.s2d;
+		var s = getScene();
+		if (s == null) {
+			return;
+		}
+
 		width = s.width;
 		height = s.height;
 
@@ -159,6 +174,7 @@ class Transition extends Interactive {
 			if (t <= 0) {
 				scalingOut = false;
 				remove();
+				//Game.instance.uiScene.filter = null;
 				if (onFinish != null) {
 					onFinish();
 				}
@@ -198,7 +214,7 @@ class Transition extends Interactive {
 	}
 
 	public static function to(onFinish:Void->Void, inTime = 0.5, outTime = 0.6) {
-		var t = new Transition(Game.instance.s2d);
+		var t = new Transition(Game.instance.uiScene);
 		t.inTime = inTime;
 		t.outTime = outTime;
 		t.show(onFinish);

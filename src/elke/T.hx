@@ -1,3 +1,4 @@
+
 package elke;
 
 typedef RGB = {
@@ -55,6 +56,26 @@ class T {
 		if (x > upper)
 			return upper;
 		return x;
+	}
+
+	public static inline function quintIn(t:Float):Float
+	{
+		return t * t * t * t * t;
+	}
+
+	public static inline function sineIn(t:Float):Float
+	{
+		return -Math.cos(PI2 * t) + 1;
+	}
+
+	public static inline function expoIn(t:Float):Float
+	{
+		return Math.pow(2, 10 * (t - 1));
+	}
+
+	public static inline function expoOut(t:Float):Float
+	{
+		return -Math.pow(2, -10 * t) + 1;
 	}
 
 	public static inline function quintOut(t:Float):Float {

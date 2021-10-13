@@ -1,5 +1,7 @@
 package elke;
 
+import h3d.Engine;
+import h2d.Scene;
 import elke.gamestate.GameState;
 import elke.sound.Sounds;
 import elke.gamestate.GameStateHandler;
@@ -17,6 +19,7 @@ class Game extends hxd.App {
     public static var instance(default, null):Game;
     
     public var paused : Bool;
+    public var uiScene: h2d.Scene;
 
     /**
      * the width of the screen in scaled pixels
@@ -103,10 +106,6 @@ class Game extends hxd.App {
 			return;
 		}
 
-		if (conf.initialState != null) {
-			states.setState(conf.initialState);
-            initialState = null;
-        }
 		if (conf.onInit != null) {
 			conf.onInit();
 		}
@@ -123,6 +122,11 @@ class Game extends hxd.App {
 			engine.backgroundColor = conf.backgroundColor;
 		}
 
+		if (conf.initialState != null) {
+			states.setState(conf.initialState);
+            initialState = null;
+        }
+
 		conf = null;
     }
 
@@ -135,17 +139,29 @@ class Game extends hxd.App {
         processes.push(p);
         p.onStart();
     }
+
     public function removeProcess(p) {
         if (processes.remove(p)) {
             p.onFinish();
         }
     }
 
+    override function render(e:Engine) {
+        super.render(e);
+        states.onRender(e);
+        uiScene.render(e);
+    }
+
     function configRenderer() {
-        // Image filtering set to nearest sharp pixel graphics
+        // Image filtering set to nearest sharp pixel graphics.
+        // If you don't want crisp pixel graphics you can just
+        // remove this
         hxd.res.Image.DEFAULT_FILTER = Nearest;
 
+        uiScene = new Scene();
+
 		#if js
+        // This causes the game to not be super small on high DPI mobile screens
 		hxd.Window.getInstance().useScreenPixels = false;
 		#end
 
@@ -189,6 +205,7 @@ class Game extends hxd.App {
         this.screenHeight = h;
 
         s2d.scaleMode = ScaleMode.Stretch(w, h);
+        uiScene.scaleMode = ScaleMode.Fixed(s.width, s.height, 1.0, Top, Left);
     }
 
     static function initResources() {

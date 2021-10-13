@@ -8,6 +8,8 @@ Some current features:
 
 * Possibility to set 2D pixel size for the screen.
 
+* Separate UI scene for high
+
 * Simple entity and gamestate system with fixed timestep updates.
 
 * A HTML template file that gets exported along with the js output.
@@ -24,3 +26,13 @@ hxd.Res.img.testcharacter_tilesheet.toSprite3D(); // Creates a 3D billboard type
 ```
 
 *Comes with fonts created by [somepx](https://twitter.com/somepx)*
+
+## Notes
+
+### Generating MSDF fonts
+
+I use the npm package `msdf-bmfont`, install it globally, and then run
+
+`msdf-bmfont --font-size 72 -b 0 -r 32 --smart-size --pot --smart-size FONT-NAME.ttf`
+
+for best default results. the `--font-size` can be changed if you want.
