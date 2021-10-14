@@ -147,7 +147,8 @@ class Game extends hxd.App {
     }
 
     override function render(e:Engine) {
-        super.render(e);
+		s3d.render(e);
+		s2d.render(e);
         states.onRender(e);
         uiScene.render(e);
     }

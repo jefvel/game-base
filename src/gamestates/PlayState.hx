@@ -22,7 +22,8 @@ class PlayState extends elke.gamestate.GameState {
 		container = new Object(game.s2d);
 		uiContainer = new Object(game.uiScene);
 
-		var t = new Text(hxd.Res.fonts.static_regular.toSdfFont(72, MultiChannel, 0.5, 1 / 32), uiContainer);
+		var fontSize = 128;
+		var t = new Text(hxd.Res.fonts.static_regular.toSdfFont(fontSize, MultiChannel), uiContainer);
 		t.textColor = 0xFFFFFF;
 		t.text = "Hello World";
 		t.textAlign = Center;
