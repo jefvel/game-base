@@ -4,9 +4,12 @@
 
 -lib heaps
 
+-lib deepnightLibs
+-lib ldtk-haxe-api
 -lib hscript
 -lib castle
 -lib stb_ogg_sound
+-lib newgrounds
 
 # -lib hide
 # -lib hxbit

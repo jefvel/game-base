@@ -1,5 +1,22 @@
 {
 	"sheets": [
+		{
+			"name": "texts",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id"
+				},
+				{
+					"typeStr": "1",
+					"name": "text",
+					"kind": "localizable"
+				}
+			],
+			"lines": [],
+			"separators": [],
+			"props": {}
+		}
 	],
 	"customTypes": [],
 	"compress": false

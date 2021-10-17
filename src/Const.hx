@@ -9,4 +9,8 @@ class Const {
     public static inline final PPU = 1.0 / PIXEL_SIZE_WORLD;
 
 	public static inline final TICK_RATE = 60;
+
+    // Newgrounds stuff
+    public static inline final NEWGROUNDS_APP_ID = "";
+    public static inline final NEWGROUNDS_ENCRYPTION_KEY_RC4 = "";
 }
