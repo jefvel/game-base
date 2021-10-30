@@ -15,7 +15,7 @@
 	<title>::windowTitle::</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 </head>
-<body onclick="window.focus()">
+<body onclick="window.focus()" onload="window.dispatchEvent(new Event('resize'));">
 	<canvas globalevents="1" propagatekeyevents="false" id="webgl"></canvas>
 	<script type="text/javascript" src="::gameFile::"></script>
 	<script>
