@@ -36,7 +36,7 @@ class PlayState extends elke.gamestate.GameState {
 		button.x = 300;
 		button.y = 300;
 		button.onClick = e -> {
-			button.color.r = Math.random();
+			bm.color.r = Math.random();
 		}
 
 		sdfText = t;
