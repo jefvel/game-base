@@ -26,11 +26,18 @@
 		}
 	</script>
 	<style>
-        html,body { 
+		        html,body { 
 			margin: 0; 	
 			padding: 0; 
 			height: 100%; 
 			overflow: hidden;
+		}
+
+		html,body,canvas#webgl {
+			-webkit-tap-highlight-color: rgba(0,0,0,0);
+			-webkit-tap-highlight-color: transparent;
+			touch-action: none;
+    		touch-action-delay: none;
 		}
 
 		canvas#webgl {
