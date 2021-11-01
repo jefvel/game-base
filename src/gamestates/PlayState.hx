@@ -1,5 +1,8 @@
 package gamestates;
 
+import h2d.Tile;
+import h2d.Bitmap;
+import h2d.Interactive;
 import entities.ExampleEntity;
 import h2d.Object;
 import elke.graphics.Transition;
@@ -28,16 +31,26 @@ class PlayState extends elke.gamestate.GameState {
 		t.text = "Hello World";
 		t.textAlign = Center;
 
+		var button = new Interactive(100, 100, container);
+		var bm = new Bitmap(Tile.fromColor(0xffffff, 100, 100), button);
+		button.x = 300;
+		button.y = 300;
+		button.onClick = e -> {
+			button.color.r = Math.random();
+		}
+
 		sdfText = t;
 	}
 
 	override function onEvent(e:Event) {
 		if (e.kind == EPush) {
 			// game.sound.playWobble(hxd.Res.sound.click, .1);
+			/*
 			var t = Transition.to(() -> {}, 0.8, 0.8);
 			var s = new SideWipeShader();
 			s.wipeColor.set(0.2, 0.2, 0.2, 1);
 			t.f.setWipeShader(s);
+			*/
 		}
 	}
 
