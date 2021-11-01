@@ -19,7 +19,6 @@ class Game extends hxd.App {
     public static var instance(default, null):Game;
     
     public var paused : Bool;
-    public var uiScene: h2d.Scene;
 
     /**
      * the width of the screen in scaled pixels
@@ -150,7 +149,6 @@ class Game extends hxd.App {
 		s3d.render(e);
 		s2d.render(e);
         states.onRender(e);
-        uiScene.render(e);
     }
 
     function configRenderer() {
@@ -158,8 +156,6 @@ class Game extends hxd.App {
         // If you don't want crisp pixel graphics you can just
         // remove this
         hxd.res.Image.DEFAULT_FILTER = Nearest;
-
-        uiScene = new Scene();
 
 		#if js
         // This causes the game to not be super small on high DPI mobile screens
@@ -206,7 +202,6 @@ class Game extends hxd.App {
         this.screenHeight = h;
 
         s2d.scaleMode = ScaleMode.Stretch(w, h);
-        uiScene.scaleMode = ScaleMode.Fixed(s.width, s.height, 1.0, Top, Left);
     }
 
     static function initResources() {

@@ -272,13 +272,15 @@
  ],
  "meta": {
   "app": "http://www.aseprite.org/",
-  "version": "1.2.25-x64",
+  "version": "1.2.29",
   "image": "boom.png",
   "format": "RGBA8888",
   "size": { "w": 80, "h": 77 },
   "scale": "1",
   "frameTags": [
    { "name": "Explosion", "from": 0, "to": 29, "direction": "forward" }
+  ],
+  "slices": [
   ]
  }
 }

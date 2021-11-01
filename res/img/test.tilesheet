@@ -38,7 +38,7 @@
  ],
  "meta": {
   "app": "http://www.aseprite.org/",
-  "version": "1.2.25-x64",
+  "version": "1.2.29",
   "image": "test.png",
   "format": "RGBA8888",
   "size": { "w": 46, "h": 60 },
@@ -46,6 +46,8 @@
   "frameTags": [
    { "name": "Ok", "from": 0, "to": 2, "direction": "forward" },
    { "name": "Smiley", "from": 3, "to": 3, "direction": "forward" }
+  ],
+  "slices": [
   ]
  }
 }

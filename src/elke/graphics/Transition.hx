@@ -120,7 +120,6 @@ class Transition extends Interactive {
 		graphics = new Bitmap(Tile.fromColor(0), this);
 		if (!alphaFade) {
 			f = new TransitionFilter();
-			//Game.instance.uiScene.filter = f;
 			graphics.filter = f;
 		}
 
@@ -174,7 +173,6 @@ class Transition extends Interactive {
 			if (t <= 0) {
 				scalingOut = false;
 				remove();
-				//Game.instance.uiScene.filter = null;
 				if (onFinish != null) {
 					onFinish();
 				}
@@ -214,7 +212,7 @@ class Transition extends Interactive {
 	}
 
 	public static function to(onFinish:Void->Void, inTime = 0.5, outTime = 0.6) {
-		var t = new Transition(Game.instance.uiScene);
+		var t = new Transition(Game.instance.s2d);
 		t.inTime = inTime;
 		t.outTime = outTime;
 		t.show(onFinish);

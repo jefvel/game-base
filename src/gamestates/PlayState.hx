@@ -20,10 +20,10 @@ class PlayState extends elke.gamestate.GameState {
 	override function onEnter() {
 		super.onEnter();
 		container = new Object(game.s2d);
-		uiContainer = new Object(game.uiScene);
+		uiContainer = new Object(game.s2d);
 
 		var fontSize = 128;
-		var t = new Text(hxd.Res.fonts.static_regular.toSdfFont(fontSize, MultiChannel), uiContainer);
+		var t = new Text(hxd.Res.fonts.futilepro_medium_12.toFont(), uiContainer);
 		t.textColor = 0xFFFFFF;
 		t.text = "Hello World";
 		t.textAlign = Center;
