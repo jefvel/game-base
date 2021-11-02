@@ -39,6 +39,7 @@ class PlayState extends elke.gamestate.GameState {
 			s.wipeColor.set(0.2, 0.2, 0.2, 1);
 			t.f.setWipeShader(s);
 		}
+		trace(e.kind);
 	}
 
 	var time = 0.0;

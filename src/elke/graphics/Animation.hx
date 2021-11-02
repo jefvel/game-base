@@ -22,6 +22,8 @@ class Animation {
 
 	public var events:Array<AnimationEvent>;
 
+	public var animationSpeed = 1.0;
+
 	var onFinish : String -> Void;
 
 	public function new(tileSheet) {
@@ -119,8 +121,16 @@ class Animation {
 		playing = false;
 	}
 
+	public function unpause() {
+		playing = true;
+	}
+
 	public function update(dt:Float) {
 		if (!playing) {
+			return;
+		}
+
+		if (Game.instance.paused) {
 			return;
 		}
 
@@ -136,8 +146,8 @@ class Animation {
 
 		var frame = tileSheet.frames[currentFrame];
 
-		elapsedTime += dt;
-		totalElapsed += dt;
+		elapsedTime += dt * animationSpeed;
+		totalElapsed += dt * animationSpeed;
 
 		if (elapsedTime * 1000 > frame.duration) {
 			elapsedTime -= frame.duration / 1000.0;

@@ -1,5 +1,6 @@
 package elke;
 
+import haxe.Timer;
 import h3d.Engine;
 import h2d.Scene;
 import elke.gamestate.GameState;
@@ -18,7 +19,7 @@ typedef GameInitConf = {
 class Game extends hxd.App {
     public static var instance(default, null):Game;
     
-    public var paused : Bool;
+    public var paused(default, set) : Bool;
 
     /**
      * the width of the screen in scaled pixels
@@ -98,6 +99,8 @@ class Game extends hxd.App {
         states = new GameStateHandler(this);
         
 		runInitConf();
+
+        onResize();
 	}
 
 	function runInitConf() {
@@ -145,10 +148,12 @@ class Game extends hxd.App {
         }
     }
 
+    public var uiScene: Scene;
     override function render(e:Engine) {
 		s3d.render(e);
 		s2d.render(e);
         states.onRender(e);
+        uiScene.render(e);
     }
 
     function configRenderer() {
@@ -163,10 +168,13 @@ class Game extends hxd.App {
 		#end
 
         engine.autoResize = true;
-
-        onResize();
+        uiScene = new Scene();
     }
 
+    var freezeFrames = 0;
+    public function freeze(frames) {
+        freezeFrames = frames;
+    }
 
     var timeAccumulator = 0.0;
     override function update(dt:Float) {
@@ -181,6 +189,11 @@ class Game extends hxd.App {
         timeAccumulator += dt;
         while (timeAccumulator > tickTime && maxTicksPerUpdate > 0) {
             timeAccumulator -= tickTime;
+            if (freezeFrames > 0) {
+                freezeFrames--;
+                continue;
+            }
+
 			for (p in processes) {
 				p.update(tickTime);
 			}
@@ -202,6 +215,7 @@ class Game extends hxd.App {
         this.screenHeight = h;
 
         s2d.scaleMode = ScaleMode.Stretch(w, h);
+        uiScene.scaleMode = ScaleMode.Resize;
     }
 
     static function initResources() {
@@ -215,5 +229,17 @@ class Game extends hxd.App {
 #end
         // Load CastleDB data.
         Data.load(hxd.Res.data.entry.getText());
+    }
+
+    function set_paused(p) {
+        if (p != this.paused) {
+            if (p) {
+                states.onPause();
+            } else {
+                states.onUnpause();
+            }
+        }
+
+        return this.paused = p;
     }
 }

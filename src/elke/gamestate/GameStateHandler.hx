@@ -32,6 +32,18 @@ class GameStateHandler {
 		}
 	}
 
+	public function onPause() {
+		if (currentState != null) {
+			currentState.onPause();
+		}
+	}
+
+	public function onUnpause() {
+		if (currentState != null) {
+			currentState.onUnpause();
+		}
+	}
+
 	public function onRender(e: Engine) {
 		if (currentState != null) {
 			currentState.onRender(e);

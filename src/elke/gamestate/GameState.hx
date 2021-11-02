@@ -8,6 +8,9 @@ class GameState {
 
 	public function onEvent(e:hxd.Event):Void {}
 
+	public function onPause() {}
+	public function onUnpause() {}
+
 	public function onEnter():Void {}
 
 	public function onLeave():Void {}

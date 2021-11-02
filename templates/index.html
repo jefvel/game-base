@@ -2,6 +2,8 @@
 <head>
 	<meta charset="utf-8" />
 
+	<title>::windowTitle::</title>
+
 	<meta name="twitter:card" content="summary" />
 	<meta name="twitter:site" content="::twitterSite::" />
 	<meta name="twitter:creator" content="::twitterCreator::" />
@@ -11,13 +13,14 @@
 	<meta property="og:description" content="::ogDescription::" />
 	<meta property="og:image" content="::ogImage::" />
 
+	<link rel="manifest" href="manifest.json" />
+
 	<meta name="msapplication-tap-highlight" content="no" />
-	<title>::windowTitle::</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 </head>
 <body onclick="window.focus()">
 	<canvas globalevents="1" propagatekeyevents="false" id="webgl"></canvas>
-	<script type="text/javascript" src="::gameFile::"></script>
+	<script type="text/javascript" src="::gameFile::" async></script>
 	<script>
 		window.addEventListener ("touchmove", function (event) { event.preventDefault (); }, { capture: false, passive: false });
 		if (typeof window.devicePixelRatio != 'undefined' && window.devicePixelRatio > 2) {
@@ -26,18 +29,18 @@
 		}
 	</script>
 	<style>
-		        html,body { 
+        html,body { 
 			margin: 0; 	
 			padding: 0; 
 			height: 100%; 
 			overflow: hidden;
 		}
 
-		html,body,canvas#webgl {
-			-webkit-tap-highlight-color: rgba(0,0,0,0);
-			-webkit-tap-highlight-color: transparent;
+		html, body, canvas {
 			touch-action: none;
-    		touch-action-delay: none;
+			touch-action-delay: none;
+			-webkit-touch-callout : none
+			-webkit-user-select: none
 		}
 
 		canvas#webgl {

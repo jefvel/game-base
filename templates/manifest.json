@@ -1,0 +1,8 @@
+{
+	"name": "::windowTitle::",
+	"short_name": "::windowTitle::",
+	"description": "::ogDescription::",
+	"display": "fullscreen",
+	"orientation": "landscape",
+	"backgroundcolor": "#ffffff"
+}
