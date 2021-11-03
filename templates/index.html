@@ -19,14 +19,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 </head>
 <body onclick="window.focus()">
-	<canvas globalevents="1" propagatekeyevents="false" id="webgl"></canvas>
+	<canvas globalevents="0" propagatekeyevents="false" id="webgl"></canvas>
 	<script type="text/javascript" src="::gameFile::" async></script>
 	<script>
 		window.addEventListener ("touchmove", function (event) { event.preventDefault (); }, { capture: false, passive: false });
+		/*
 		if (typeof window.devicePixelRatio != 'undefined' && window.devicePixelRatio > 2) {
 			var meta = document.getElementById ("viewport");
 			meta.setAttribute ('content', 'width=device-width, initial-scale=' + (2 / window.devicePixelRatio) + ', user-scalable=no');
 		}
+		*/
 	</script>
 	<style>
         html,body { 
@@ -39,8 +41,12 @@
 		html, body, canvas {
 			touch-action: none;
 			touch-action-delay: none;
-			-webkit-touch-callout : none
-			-webkit-user-select: none
+			user-select: none;
+			-webkit-tap-highlight-color: transparent;
+			-webkit-touch-callout : none;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
 		}
 
 		canvas#webgl {
@@ -48,6 +54,27 @@
 			height: 100% !important;
 		}
 	</style>
+
 	::additionalCss::
+
+	<script>
+		if ('serviceWorker' in navigator) {
+			navigator.serviceWorker.register('sw.js').then(function(registration) {
+				console.log('Service worker registration succeeded:', registration);
+			}, function(error) {
+				console.log('Service worker registration failed:', error);
+			});
+		} else {
+			console.log('Service workers are not supported.');
+		}
+
+		/* Add to homescreen stuff */
+		window.addEventListener('beforeinstallprompt', (e) => {
+			// Prevent Chrome 67 and earlier from automatically showing the prompt
+			e.preventDefault();
+			// Stash the event so it can be triggered later.
+			window.installPWAPrompt = e;
+		});
+	</script>
 </body>
 </html>

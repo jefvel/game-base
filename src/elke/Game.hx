@@ -242,4 +242,66 @@ class Game extends hxd.App {
 
         return this.paused = p;
     }
+
+    public function vibrate(duration: Int) {
+        #if js
+        if (js.Browser.navigator.vibrate != null) {
+		    js.Browser.navigator.vibrate(duration);
+        }
+        #end
+    }
+
+    /**
+     * Checks whether or not the game can be added to the
+     * home screen on mobile devices.
+     */
+    public function canBeAddedAsPWA() {
+        #if js
+		var d: Dynamic = js.Browser.window;
+		return d.installPWAPrompt != null;
+        #end
+
+        return false;
+    }
+
+    /**
+     * shows the build in prompt for installing the game
+     * as a PWA on mobiles/desktops
+     * @param onAccept happens when the user accepts the prompt
+     * @param onDecline happens if the user declines, or the prompt couldn't be shown
+     */
+    public function promptAddAsPWA(?onAccept: Void -> Void, ?onDecline: Void -> Void) {
+        #if js
+        var d: Dynamic = js.Browser.window;
+        var deferredInstall = null;
+        if (d.installPWAPrompt != null) {
+            deferredInstall = d.installPWAPrompt;
+        }
+        if (deferredInstall != null) {
+            deferredInstall.prompt();
+            deferredInstall.userChoice.then((choiceResult) -> {
+                if (choiceResult.outcome == 'accepted') {
+                    var d: Dynamic = js.Browser.window;
+                    d.installPWAPrompt = null;
+                    if (onAccept != null) {
+                        onAccept();
+                    }
+                } else {
+                    if (onDecline != null) {
+                        onDecline();
+                    }
+                }
+            });
+        } else {
+            if (onDecline != null) {
+                onDecline();
+            }
+        }
+        #end
+
+        if (onDecline != null) {
+            onDecline();
+        }
+    }
+
 }

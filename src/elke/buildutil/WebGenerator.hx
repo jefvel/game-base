@@ -33,6 +33,7 @@ class WebGenerator {
 			ogUrl: val("ogUrl"),
 			ogDescription: val("ogDescription"),
 			ogImage: val("ogImage"),
+			backgroundColor: val("backgroundColor"),
 		};
 
 		final fixedWindow = haxe.macro.Context.definedValue("windowFixed");

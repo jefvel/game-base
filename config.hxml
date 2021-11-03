@@ -9,6 +9,7 @@
 # Uncomment if you want a static sized window
 #-D windowFixed
 
+-D backgroundColor=#17171a
 
 ## HTML/Js Specific values
 # Twitter card
