@@ -145,7 +145,6 @@ class SpriteGroup extends TileGroup {
 			sprites.sort((a, b) -> Std.int((a.y + a.offsetY) - (b.y + b.offsetY)));
 		}
 
-
 		for (s in sprites) {
 			s.update(dt);
 		}

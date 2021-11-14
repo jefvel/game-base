@@ -25,7 +25,10 @@ class CollisionHandler {
 	public var bucketSize = 100;
 	public var width = 2000.;
 	public var height = 2000.;
-    public function resolve() {
+    public function resolve(?objects:Array<CollisionObject>) {
+		if (objects == null) {
+			objects = this.objects;
+		}
 
 		var buckets = new Map<Int, Array<CollisionObject>>();
 		var columns = Std.int(Math.ceil(bucketSize / width));
