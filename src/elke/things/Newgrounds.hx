@@ -1,3 +1,5 @@
+package elke.things;
+
 import hxd.Save;
 import haxe.Timer;
 
@@ -21,6 +23,9 @@ private class NewgroundsData {
 	}
 }
 
+/**
+ * Simple class for managing newgrounds leaderboards and medals
+ */
 class Newgrounds {
 	public static var instance(get, null) : Newgrounds;
 

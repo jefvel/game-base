@@ -6,7 +6,8 @@ import h2d.Graphics;
 class TouchJoystick extends Object {
 	var bg: Graphics;
 	var dot: Graphics;
-	var r = 49.;
+
+	var r = 54.;
 	var maxR = 72;
 	#if js
 	public var touchId = null;
@@ -37,6 +38,11 @@ class TouchJoystick extends Object {
 		active = false;
 		visible = false;
 		mx = my = magnitude = 0;
+	}
+
+	public function enable() {
+		disabled = false;
+		visible = true;
 	}
 
 	public function start(x, y, touchID) {
