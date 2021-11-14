@@ -1,5 +1,6 @@
 package elke.res;
 
+import h2d.Tile;
 import elke.graphics.Animation;
 import elke.graphics.AsepriteResource;
 import elke.graphics.Sprite;
@@ -58,6 +59,10 @@ class TileSheetRes extends hxd.res.Resource {
 
 	public var totalLength : Int;
 
+	/**
+	 * Full tile of the tilesheet
+	 */
+	public var tile: Tile;
 	var tiles : Array<h2d.Tile>;
 
 	public var events : Array<TileSheetEvent>;
@@ -104,6 +109,7 @@ class TileSheetRes extends hxd.res.Resource {
 		}
 
 		var tile = hxd.res.Loader.currentInstance.load(basePath + ".png").toTile();
+		this.tile = tile;
 		image = tile;
 		width = data.frames[0].sourceSize.w;
 		height = data.frames[0].sourceSize.h;
@@ -174,6 +180,14 @@ class TileSheetRes extends hxd.res.Resource {
 		}
 
 		return new Animation(this);
+	}
+
+	public function toTileSheet(): TileSheetRes {
+		if (!loaded) {
+			loadData();
+		}
+
+		return this;
 	}
 
 	public function toSprite3D(?parent) : Sprite3D {

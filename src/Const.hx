@@ -10,7 +10,9 @@ class Const {
 
 	public static inline final TICK_RATE = 60;
 
+    // change this to 
+    public static inline final SAVE_NAMESPACE = haxe.macro.Compiler.getDefine("saveNamespace");
     // Newgrounds stuff
-    public static inline final NEWGROUNDS_APP_ID = "";
-    public static inline final NEWGROUNDS_ENCRYPTION_KEY_RC4 = "";
+    public static inline final NEWGROUNDS_APP_ID = haxe.macro.Compiler.getDefine("newgroundsAppId");
+    public static inline final NEWGROUNDS_ENCRYPTION_KEY_RC4 = haxe.macro.Compiler.getDefine("newgroundsEncryptionKey");
 }

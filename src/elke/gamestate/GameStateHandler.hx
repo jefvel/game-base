@@ -17,7 +17,6 @@ class GameStateHandler {
 	public function new(g:Game) {
 		instance = this;
 		game = g;
-		hxd.Window.getInstance().addEventTarget(onEvent);
 	}
 
 	public function update(dt:Float) {
@@ -26,7 +25,7 @@ class GameStateHandler {
 		}
 	}
 
-	function onEvent(e:hxd.Event) {
+	public function onEvent(e:hxd.Event) {
 		if (currentState != null) {
 			currentState.onEvent(e);
 		}
@@ -57,8 +56,7 @@ class GameStateHandler {
 
 		s.game = game;
 
-		s.onEnter();
-
 		currentState = s;
+		s.onEnter();
 	}
 }

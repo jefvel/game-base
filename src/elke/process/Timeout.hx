@@ -1,15 +1,14 @@
 package elke.process;
 
 class Timeout extends Process {
-	public var duration:Float;
+	public var duration:Float = 0.;
 
-	var elapsed:Float;
+	var elapsed:Float = 0.;
 
 	var onRun:Void->Void;
 
-	public function new(time:Float, run:Void->Void) {
+	public function new(time:Float = 0., run:Void->Void) {
 		duration = time;
-		elapsed = 0.0;
 		this.onRun = run;
 		super();
 	}

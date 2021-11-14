@@ -11,11 +11,12 @@ class PlayState extends elke.gamestate.GameState {
 	var container:Object;
 
 	public function new() {}
+
 	var e:ExampleEntity;
 
-	var sdfText : Text;
+	var sdfText:Text;
 
-	var uiContainer: Object;
+	var uiContainer:Object;
 
 	override function onEnter() {
 		super.onEnter();
@@ -39,7 +40,6 @@ class PlayState extends elke.gamestate.GameState {
 			s.wipeColor.set(0.2, 0.2, 0.2, 1);
 			t.f.setWipeShader(s);
 		}
-		trace(e.kind);
 	}
 
 	var time = 0.0;

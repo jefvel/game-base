@@ -2,14 +2,18 @@
 # Configuration
 ###
 
-
 ## Window
--D windowTitle=✔ Game
+-D windowTitle=Game
 -D windowSize=1280x720
-# Uncomment if you want a static sized window
+# Sets the default color of the scene + html background
+-D backgroundColor=#202030
+
+# Uncomment if you want a static sized window size
 #-D windowFixed
 
--D backgroundColor=#17171a
+## Saves
+# Change this to a unique identifier for your game
+-D saveNamespace=game-base
 
 ## HTML/Js Specific values
 # Twitter card
@@ -20,6 +24,10 @@
 -D ogDescription=Your game Description
 -D ogImage=https://link.to.your.img/photo.png
 
+## Newgrounds stuff
+-D newgroundsAppId=fill in your newgrounds app ID here
+# RC4 Encryption key required
+-D newgroundsEncryptionKey=fill in your newgrounds encryption key here
 
 ## Etc
 # Uncomment and set if your Aseprite installation is not in the default path

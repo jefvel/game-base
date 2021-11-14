@@ -86,10 +86,12 @@ class TransitionFilter extends Filter {
 	 */
 	public var progress:Float;
 	public var wipeFilter:ScreenFx<WipeShader>;
+	public var shader: WipeShader;
 
 	public function new() {
 		super();
-		wipeFilter = new ScreenFx<WipeShader>(new WipeShader());
+		shader = new WipeShader();
+		wipeFilter = new ScreenFx<WipeShader>(shader);
 	}
 
 	public function setWipeShader(s: WipeShader) {
@@ -115,11 +117,17 @@ class Transition extends Interactive {
 
 	var alphaFade = false;
 
-	public function new(?parent) {
+	public function new(?parent, color = 0x000000) {
 		super(1, 1, parent);
-		graphics = new Bitmap(Tile.fromColor(0), this);
+		graphics = new Bitmap(Tile.fromColor(color), this);
 		if (!alphaFade) {
 			f = new TransitionFilter();
+			f.shader.wipeColor.set(
+				(color >> 16 & 255) / 255,
+				(color >> 8 & 255) / 255,
+				(color >> 0 & 255) / 255
+			);
+			//Game.instance.uiScene.filter = f;
 			graphics.filter = f;
 		}
 
@@ -161,7 +169,7 @@ class Transition extends Interactive {
 				var finish = onFinish;
 				onFinish = null;
 				if (finish != null) {
-					finish();
+					Game.instance.dispatchCommand(finish);
 				}
 				if (auto) {
 					t = 2.3;
@@ -173,6 +181,7 @@ class Transition extends Interactive {
 			if (t <= 0) {
 				scalingOut = false;
 				remove();
+				//Game.instance.uiScene.filter = null;
 				if (onFinish != null) {
 					onFinish();
 				}
@@ -211,8 +220,8 @@ class Transition extends Interactive {
 		}
 	}
 
-	public static function to(onFinish:Void->Void, inTime = 0.5, outTime = 0.6) {
-		var t = new Transition(Game.instance.s2d);
+	public static function to(onFinish:Void->Void, inTime = 0.5, outTime = 0.6, color = 0x000000) {
+		var t = new Transition(Game.instance.s2d, color);
 		t.inTime = inTime;
 		t.outTime = outTime;
 		t.show(onFinish);

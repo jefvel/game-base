@@ -1,5 +1,6 @@
 package elke.graphics;
 
+import h2d.Tile;
 import elke.res.TileSheetRes;
 
 typedef AnimationEvent = {
@@ -73,6 +74,33 @@ class Animation {
 			}
 		}
 	}
+	
+	/**
+	 * Returns the starting frame of a tag
+	 * @param tag 
+	 */
+	public function getFrameByTagName(tag: String) {
+		var t = tileSheet.getAnimation(tag);
+		if (t == null) {
+			return null;
+		}
+
+		return tileSheet.frames[t.from];
+	}
+
+	public function getTilesByTagName(tag): Array<Tile> {
+		var t = tileSheet.getAnimation(tag);
+		if (t == null) {
+			return null;
+		}
+
+		var res = [];
+		for (i in t.from...t.to + 1) {
+			res.push(tileSheet.frames[i].tile);
+		}
+
+		return res;
+	}
 
 	public function getSlice(name: String) {
 		var s = tileSheet.slices[name];
@@ -87,6 +115,10 @@ class Animation {
 		}
 
 		return null;
+	}
+
+	public function frameCount() {
+		return tileSheet.frames.length;
 	}
 
 	public function getCurrentFrame() {

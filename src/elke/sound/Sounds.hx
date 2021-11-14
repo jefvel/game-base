@@ -1,5 +1,6 @@
 package elke.sound;
 
+import hxd.snd.SoundGroup;
 import hxd.snd.Channel;
 import hxd.res.Sound;
 import hxd.snd.ChannelGroup;
@@ -34,19 +35,18 @@ class Sounds {
 		return snd.play(loop, volume, sfxChannel);
 	}
 
-	public function playMusic(music:Sound, volume = .5, crossFadeTime = 0.2) {
-		if (currentMusic != null) {
-			currentMusic.fadeTo(0, crossFadeTime, () -> currentMusic.stop());
-		}
-
-		currentMusic = music.play(true, 0, musicChannel);
-		currentMusic.fadeTo(volume, crossFadeTime);
+	public function playMusic(music:Sound, volume = .5, loop = true) {
+		currentMusic = music.play(loop, volume, musicChannel);
 		return currentMusic;
 	}
 
-	public function stopMusic(fadeoutTime = 0.4) {
+	public function stopMusic(fadeoutTime = 0.0) {
 		if (currentMusic != null) {
-			currentMusic.fadeTo(0, fadeoutTime, () -> currentMusic.stop());
+			if (fadeoutTime > 0) {
+				currentMusic.fadeTo(0, fadeoutTime, () -> currentMusic.stop());
+			} else {
+				currentMusic.stop();
+			}
 			currentMusic = null;
 		}
 	}
