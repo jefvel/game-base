@@ -118,6 +118,10 @@ class Game extends hxd.App {
 
 	public function new(?conf:GameInitConf) {
 		super();
+        #if (hl && !debug) 
+        hl.UI.closeConsole();
+        #end
+
 		this.conf = conf;
 	}
 
