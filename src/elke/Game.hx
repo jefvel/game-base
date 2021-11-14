@@ -1,6 +1,5 @@
 package elke;
 
-import dn.Color;
 import elke.input.GamePadHandler;
 import elke.process.Command;
 import h2d.Text;
