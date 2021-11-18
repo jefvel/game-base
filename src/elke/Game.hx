@@ -98,8 +98,8 @@ class Game extends hxd.App {
 	public var tickRate(default, set) = 60;
 
 	public var tickTime:Float = 1 / 60.;
-    
-    public var timeScale = 1.0;
+
+	public var timeScale = 1.0;
 
 	function set_tickRate(r:Int) {
 		tickTime = 1. / r;
@@ -117,9 +117,9 @@ class Game extends hxd.App {
 
 	public function new(?conf:GameInitConf) {
 		super();
-        #if (hl && !debug) 
-        hl.UI.closeConsole();
-        #end
+		#if (hl && !debug)
+		hl.UI.closeConsole();
+		#end
 
 		this.conf = conf;
 	}
