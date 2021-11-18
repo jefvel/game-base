@@ -15,6 +15,8 @@
 # Change this to a unique identifier for your game
 -D saveNamespace=game-base
 
+-D enableGamepads
+
 ## HTML/Js Specific values
 # Twitter card
 -D twitterSite=https://yourwebsite.com
