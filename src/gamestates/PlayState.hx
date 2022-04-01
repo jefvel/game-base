@@ -44,8 +44,7 @@ class PlayState extends elke.gamestate.GameState {
 
 	var time = 0.0;
 
-	override function update(dt:Float) {
-		super.update(dt);
+	override function tick(dt:Float) {
 		time += dt;
 
 		var s = text.getScene();

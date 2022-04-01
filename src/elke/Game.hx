@@ -1,5 +1,6 @@
 package elke;
 
+import hxd.Window;
 import elke.input.GamePadHandler;
 import elke.process.Command;
 import h2d.Text;
@@ -57,6 +58,8 @@ class Game extends hxd.App {
 	public var states:GameStateHandler;
 
 	public var sound:Sounds;
+
+	public var time = 0.;
 
 	/**
 	 *  mouse x in scaled screen pixels
@@ -173,6 +176,11 @@ class Game extends hxd.App {
 			inputMethod = KeyboardAndMouse;
 		}
 		#end
+
+		if (e.kind == EMove) {
+			mouseX = Std.int(e.relX / pixelSize);
+			mouseY = Std.int(e.relY / pixelSize);
+		}
 
 		if (e.kind == EFocusLost) {
 			gamepads.inFocus = false;
@@ -321,6 +329,7 @@ class Game extends hxd.App {
 		#end
 
 		engine.autoResize = true;
+
 		uiScene = new Scene();
 	}
 
@@ -339,7 +348,6 @@ class Game extends hxd.App {
 	var timeAccumulator = 0.0;
 
 	override function update(dt:Float) {
-		super.update(dt);
 		// benchmark.begin();
 
 		var maxTicksPerUpdate = 3;
@@ -350,7 +358,13 @@ class Game extends hxd.App {
 		}
 
 		timeAccumulator += dt;
+
+		var timeUntilTick = Math.max(tickTime - timeAccumulator, 0);
+
+		states.update(dt, timeUntilTick);
+
 		while (timeAccumulator > tickTime * timeScale && maxTicksPerUpdate > 0) {
+
 			if (commands.length > 0) {
 				for (c in commands)
 					c();
@@ -363,12 +377,15 @@ class Game extends hxd.App {
 				continue;
 			}
 
-			states.update(tickTime * timeScale);
 
 			// States are still updated, to make sure pause menus and such work
 			if (paused) {
 				return;
 			}
+
+			time += tickTime;
+
+			states.tick(tickTime * timeScale);
 
 			for (p in processes) {
 				p.update(tickTime * timeScale);

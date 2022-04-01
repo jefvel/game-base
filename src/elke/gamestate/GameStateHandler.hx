@@ -19,9 +19,15 @@ class GameStateHandler {
 		game = g;
 	}
 
-	public function update(dt:Float) {
+	public function update(dt: Float, timeUntilTick: Float) {
 		if (currentState != null) {
-			currentState.update(dt);
+			currentState.update(dt, timeUntilTick);
+		}
+	}
+
+	public function tick(dt:Float) {
+		if (currentState != null) {
+			currentState.tick(dt);
 		}
 	}
 

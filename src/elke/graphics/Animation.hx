@@ -103,6 +103,14 @@ class Animation {
 	}
 
 	public function getSlice(name: String) {
+		var f = getCurrentFrame();
+		if (f.slices == null) {
+			return null;
+		}
+
+		return f.slices[name];
+
+		/*
 		var s = tileSheet.slices[name];
 		if (s == null) {
 			return null;
@@ -115,6 +123,7 @@ class Animation {
 		}
 
 		return null;
+		*/
 	}
 
 	public function frameCount() {

@@ -5,6 +5,8 @@ import h2d.col.Point;
 interface CollisionObject {
 	var x: Float;
 	var y: Float;
+	var vx: Float;
+	var vy: Float;
 	var rotation: Float;
 	var radius: Float;
 	var mass: Float;
@@ -16,20 +18,14 @@ interface CollisionObject {
  * resolves collisions between an array of circles
  */
 class CollisionHandler {
-    public var objects : Array<CollisionObject>;
-    public function new(objects : Array<CollisionObject>) {
-        this.objects = objects;
+    public function new() {
     }
 
 	public var useBuckets = true;
 	public var bucketSize = 100;
 	public var width = 2000.;
 	public var height = 2000.;
-    public function resolve(?objects:Array<CollisionObject>) {
-		if (objects == null) {
-			objects = this.objects;
-		}
-
+    public function resolve(objects:Array<CollisionObject>) {
 		var buckets = new Map<Int, Array<CollisionObject>>();
 		var columns = Std.int(Math.ceil(bucketSize / width));
 		var d = new Point();
@@ -60,11 +56,21 @@ class CollisionHandler {
 						move2 = 1;
 					}
 
-					m.x += d.x * move2;
-					m.y += d.y * move2;
+					var vx1 = d.x * move2;
+					var vy1 = d.y * move2;
 
-					m2.x -= d.x * move1;
-					m2.y -= d.y * move1;
+					m.x += vx1;
+					m.y += vy1;
+					m.vx += vx1 * 0.5;
+					m.vy += vy1 * 0.5;
+
+					var vx2 = d.x * move1;
+					var vy2 = d.y * move1;
+
+					m2.x -= vx2;
+					m2.y -= vy2;
+					m2.vx -= vx2 * 0.5;
+					m2.vy -= vy2 * 0.5;
 				}
 			}
 		}

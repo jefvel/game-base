@@ -15,7 +15,18 @@ class GameState {
 
 	public function onLeave():Void {}
 
-	public function update(dt:Float):Void {}
+	/**
+	 * tick runs at a fixed timestep
+	 * @param dt 
+	 */
+	public function tick(dt:Float):Void {}
+
+	/**
+	 * update runs every frame, at a variable dt
+	 * @param dt 
+	 * @param timeUntilTick time until current tick ends
+	 */
+	public function update(dt:Float, timeUntilTick: Float):Void {}
 
 	public function onRender(e:h3d.Engine):Void {}
 }
